@@ -6,7 +6,7 @@
 #    By: gomandam <gomandam@student.42madrid.c      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/21 01:03:46 by gomandam          #+#    #+#              #
-#    Updated: 2026/05/21 01:36:57 by gomandam         ###   ########.fr        #
+#    Updated: 2026/05/21 01:52:59 by gomandam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ OBJECTS = $(SOURCES:.cpp=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJETS)
+$(NAME): $(OBJECTS)
 	$(COMPILER) $(FLAGS) -o $@ $^
 
 $.o: %.cpp
