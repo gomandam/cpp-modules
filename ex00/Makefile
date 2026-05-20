@@ -6,7 +6,7 @@
 #    By: gomandam <gomandam@student.42madrid.c      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/21 01:03:46 by gomandam          #+#    #+#              #
-#    Updated: 2026/05/21 01:52:59 by gomandam         ###   ########.fr        #
+#    Updated: 2026/05/21 01:54:29 by gomandam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ all: $(NAME)
 $(NAME): $(OBJECTS)
 	$(COMPILER) $(FLAGS) -o $@ $^
 
-$.o: %.cpp
+%.o: %.cpp
 	$(COMPILER) $(FLAGS) -c $< -o $@
 
 clean:
