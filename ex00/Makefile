@@ -6,11 +6,11 @@
 #    By: gomandam <gomandam@student.42madrid.c      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/21 01:03:46 by gomandam          #+#    #+#              #
-#    Updated: 2026/05/21 03:11:42 by gomandam         ###   ########.fr        #
+#    Updated: 2026/05/21 23:37:52 by gomandam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Megaphone
+NAME = megaphone
 
 COMPILER = c++
 FLAGS = -Wall -Werror -Wextra -std=c++98
