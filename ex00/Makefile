@@ -6,17 +6,17 @@
 #    By: gomandam <gomandam@student.42madrid.c      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/21 01:03:46 by gomandam          #+#    #+#              #
-#    Updated: 2026/05/21 01:54:29 by gomandam         ###   ########.fr        #
+#    Updated: 2026/05/21 23:37:52 by gomandam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = megaphone
 
-COMPILER = g++
+COMPILER = c++
 FLAGS = -Wall -Werror -Wextra -std=c++98
 RM = rm -rf
 
-SOURCES = megaphone.cpp
+SOURCES = Megaphone.cpp
 
 OBJECTS = $(SOURCES:.cpp=.o) 
 
