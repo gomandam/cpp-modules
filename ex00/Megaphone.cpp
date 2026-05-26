@@ -6,13 +6,13 @@
 /*   By: gomandam <gomandam@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 19:37:49 by gomandam          #+#    #+#             */
-/*   Updated: 2026/05/21 23:40:43 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/05/25 21:20:43 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include <string>
 #include <cctype> // std::toupper
+// #include <string>
 
 void	toUppercase(int	argc, char *argv[])
 {

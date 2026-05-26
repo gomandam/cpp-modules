@@ -3,69 +3,57 @@
 /*                                                        :::      ::::::::   */
 /*   class.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gomandam <gomandam@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: gomandam <gomandam@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/22 20:29:06 by gomandam          #+#    #+#             */
-/*   Updated: 2026/05/23 00:48:50 by gomandam         ###   ########.fr       */
+/*   Created: 2026/05/26 21:49:44 by gomandam          #+#    #+#             */
+/*   Updated: 2026/05/26 22:56:09 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+// making objects by using class
+
 #include <iostream>
 #include <string>
-#include <cctype>
-#include <sstream>
-#include <cstdlib>
 
-class Human				// user-defined datatype
+class kindOfObject
 {
-	public:				// what is this? and why with ':'
-		std::string name;
-		std::string occupation;
-		int age;		// std:: not needed?
-	
-		void eat()
-		{	std::cout << "Action: eating\n";	}
-		
-		void drink()
-		{	std::cout << "Action: drinking\n";	}
-		
-		void sleep()
-		{	std::cout << "Action: sleeping\n";	}
+	// public access specifier, members/elements are accessible outside class
+	// group together: datatypes, functions ..etc
+	public:
+		std::string	name;
+		std::string	shape;
+		double	weight;
+		int	quantity;
+
+	void selectAny(int amount)
+	{
+		quantity = quantity - amount;
+	}
 };
 
 int	main(void)
 {
-	Human human1;			// used like a datatype
+	// create an object instance 'kindOfObject' with datatypes/elements
+	kindOfObject  computerScreen;
+	computerScreen.name = "MAC";
+	computerScreen.shape = "rectangle";
+	computerScreen.weight = 5.555;
+	computerScreen.quantity = 6;
+
+	std::cout << computerScreen.name << " has " << computerScreen.quantity
+		  << " items \n";
+	std::cout << "Parameters: " << computerScreen.shape << " "
+		  << computerScreen.weight << "kg " << std::endl;
 	
-	human1.name = "Danpoi";
-	human1.occupation = "scientists";
-	human1.age = 30;
-
-	std::stringstream str_age;			// create empty stringstream/buffer
-	str_age << human1.age; 				// insert INT value to stringstream 'str_age'
-	std::string string_result = str_age.str();  	// assigns value to string varaiable
-
-	std::cout << "Name: " << human1.name << std:: endl;
-	std::cout << "Occupation: " << human1.occupation << std:: endl;
-	std::cout << "Age: " << string_result << std::endl;
-	std::cout << "The great " << human1.name << std:: endl;
-	
-	std::cout << "Print Memory Address of 'Age': " << str_age << std::endl;
-
-//	string age_ = to_string(human1.age);
-//	result << atoi(human1.age);	
-//	std::cout << "Age: " << result << std:: endl;
-	return (0);
+	std::cout << "Take a quantity of: ";
+	int	get;
+	std::cin >> get;
+	if (get <= computerScreen.quantity)
+	{
+		computerScreen.selectAny(get);
+		std::cout << "Total quantity; " << computerScreen.quantity << std::endl;
+	}
+	else
+		std::cout << "Invalid amount. Go kill yourself.\n";
+	return (0);	
 }
-
-/*
-There are 4 major methods to convert a number to a string, which are as follows:
-
-	std::stringstream - 
-	
-	ITOA() - purely C-style, C-standard library
-	to_string() - printf and C-style, prohibited in C++98
-    
-	sprintf() function - prohibited in C++98
-	boost lexical cast - prohibited in C++98
-*/

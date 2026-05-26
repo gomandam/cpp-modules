@@ -6,9 +6,12 @@
 /*   By: gomandam <gomandam@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 02:19:21 by gomandam          #+#    #+#             */
-/*   Updated: 2026/05/26 02:25:28 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/05/26 03:53:08 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+// SWITCH-CASES: useful for sequential or cascading cases,
+//	instead of using IF cases and FOR loops
 
 #include <iostream>
 

@@ -1,12 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phonebook.cpp                                      :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gomandam <gomandam@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/23 02:48:40 by gomandam          #+#    #+#             */
-/*   Updated: 2026/05/23 05:47:07 by gomandam         ###   ########.fr       */
+/*   Created: 2026/05/23 05:46:10 by gomandam          #+#    #+#             */
+/*   Updated: 2026/05/26 03:45:21 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <iostream>
+#include <cctype>
+#include <string>
+
+int	main(void)
+{
+	
+}
+
+// for selecting ADD, SEARCH, EXIT. Make them '==' to INT and use SWITCH-CASES
