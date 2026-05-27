@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/23 05:46:10 by gomandam          #+#    #+#             */
-/*   Updated: 2026/05/27 02:30:19 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/05/27 02:37:12 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,4 @@ int	main(int argc, char *av[])
    	cin.eof()
 	string.compare()
 	getline(std::cin, s)
-
 */
