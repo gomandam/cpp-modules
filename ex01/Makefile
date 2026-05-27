@@ -6,7 +6,7 @@
 #    By: gomandam <gomandam@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/23 02:16:59 by gomandam          #+#    #+#              #
-#    Updated: 2026/05/23 03:51:22 by gomandam         ###   ########.fr        #
+#    Updated: 2026/05/27 02:07:58 by gomandam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ COMPILER = c++
 FLAGS = -Wall -Werror -Wextra -std=c++98
 RM = rm -rf 
 
-SOURCES =	phonebook.cpp 
+SOURCES =	main.cpp 
 
 OBJECTS = $(SOURCES:.cpp=.o)
 
