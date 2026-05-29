@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/23 05:46:10 by gomandam          #+#    #+#             */
-/*   Updated: 2026/05/27 02:37:12 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/05/29 20:24:06 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int argc, char *av[])
 {
 	bool	workStatus;
 	std::string	cmd; // ADD, SEARCH, EXIT
-
+	
 	(void)av;
 	if (argc != 1)
 		return (EXIT_FAILURE);
@@ -37,11 +37,11 @@ int	main(int argc, char *av[])
 			std::cout << "SEARCH-function\n";
 		else if (cmd == "EXIT")
 		{
-			std::cout << "EXIT-function\n";
+			std::cout << "EXIT\n";
 			break;
 		}
 		else
-			std::cout << "Invalid command input. Consider your life choices.\n";
+			std::cerr << "Invalid command input. Consider your life choices.\n";
 	}
 	return (EXIT_SUCCESS);
 }
