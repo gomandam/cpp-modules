@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 15:50:47 by gomandam          #+#    #+#             */
-/*   Updated: 2026/05/27 19:12:54 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/06/03 06:08:48 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,44 +39,88 @@ class Character
 		std::string	name;	// initialized in public, but recommended in private as standard practice
 		std::string	role;
 		int	level;
+		double	healthpoints;
+
+	// getter(); since you can only access private inside the class -> make public function
+	double	getLifePoints()
+	{
+		return (this-> _lifePoints);
+	}
+
+	double	getAttack()
+	{
+		return (this-> _attack);
+	}
+
+	std::string	getNickname()
+	{
+		return (this-> _nickname);
+	}
 
 	void	increaseLevel(int addlvl)
 	{
 		for (int i = 0; i < addlvl; ++i)
 		{
 			levelUpOnce();	// public call from private
-			std::cout << "HP increased: " << lifePoints << std::endl;
-			std::cout << "Attack increased: " << attack << std::endl;
+			std::cout << "HP increased: " << _lifePoints << std::endl;
+			std::cout << "Attack increased: " << _attack << std::endl;
 		}
 	}
 
+	// setter(); concept similar to getter() but uses a "this->" pointer(?) to access/write value
+	void	setLifePoints(double lifeValue)
+	{
+		if (lifeValue >= 9999)	// add hypothetical edge-cases
+			std::cerr << "Max value error. You are not immortal.";
+		this-> _lifePoints = lifeValue;	
+	}
+
+	void setAttack(double atkdmg)
+	{
+		if (atkdmg >= 9999)
+			std::cerr << "Max value error. You are not a god.";
+		this-> _attack = atkdmg;
+	}
+
+	void	setNickname(std::string	insertNickName)
+	{
+		this-> _nickname = insertNickName;
+	}
+
+/******************************************************************/
+
 	private:
-		double	lifePoints = 300;	// error: if compiled in c++98, since no constructor
-		double	attack = 10.50;
+		double	_lifePoints = 300;	// error: if compiled in c++98, since no constructor
+		double	_attack = 10.50;
+		std::string	_nickname = "Bakunawa";
 
 	void levelUpOnce()
 	{
 		++level;
-		lifePoints = lifePoints + (lifePoints * 0.1337);
-		attack = attack + (attack * 0.42);
+		_lifePoints = _lifePoints + (_lifePoints * 0.1337);
+		_attack = _attack + (_attack * 0.42);
 	}
 };
 
 int	main(void)
 {
 	Character	danpoi;
-	danpoi.name = "Than Fui";
+	danpoi.name = "ThanFui";
 	danpoi.role = "Bard";
 	danpoi.level = 0;
 
 
 // GM buff: increase lvl
 	danpoi.increaseLevel(25);
-	std::cout << danpoi.name << " the " << danpoi.role << " reached level: " << danpoi.level;
+	std::cout << "\nCharacter: " << danpoi.name << " the " << danpoi.role << " reached level: " << danpoi.level;
 
 // By using (pointers?) std::cout the previous level, lifePoints, attack -> to the new one.
+// By using "this->" like a pointer to change values from private manually: use the getter() and setter()
+	danpoi.setLifePoints(3300.33);
+	danpoi.setAttack(99.99);
+	danpoi.setNickname("NewBakunawa");
+	std::cout << "\nRenamed (set new nickname): " << danpoi.getNickname() << std::endl;
+	std::cout << "Changed the health and attack to: " << danpoi.getLifePoints() << " and " << danpoi.getAttack() << std::endl;
 	return (0);
 }
-
-
 
