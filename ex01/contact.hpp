@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 15:44:46 by gomandam          #+#    #+#             */
-/*   Updated: 2026/05/29 22:00:20 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/06/04 13:04:44 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,18 @@ class Contact
 	public:
 		Contact(void);
 		~Contact(void);
-	// functions for getInfo
+// setter() functions for getInfo, pass by reference & not value copy
 	void	putContact(const std::string &firstName,
 			const std::string &lastName,
 			const std::string &nickName,
 			const std::string &phoneNumber,
 			const std::string &darkSecret);
-	// pass by reference & no value copy
+// getter() constant: only for reading, prevents modification of members. Standard practice
+	std::string getFirstName(void) const;
+	std::string getLastName(void) const;
+	std::string getNickName(void) const;
+	std::string getPhoneNumber(void) const;
+	std::string getDarkSecret(void) const;
 
 	private:
 		std::string	_firstName;
@@ -34,9 +39,8 @@ class Contact
 		std::string	_nickName;
 		std::string	_phoneNumber;
 		std::string	_darkSecret;
-};
-
 // Std nomenclature: "_" for private variables in the class
-
+// "const" at the beginning, return type. But at end, member function 
+};
 
 #endif

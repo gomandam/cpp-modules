@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 15:50:47 by gomandam          #+#    #+#             */
-/*   Updated: 2026/06/03 06:13:51 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/06/04 10:15:09 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,9 @@ class Character
 /******************************************************************/
 
 	private:
-		double	_lifePoints = 300;	// error: if compiled in c++98, since no constructor
-		double	_attack = 10.50;
-		std::string	_nickname = "Bakunawa";
+		double	_lifePoints = 3000.001;	// error: if compiled in c++98, since no constructor
+		double	_attack = 1000.50;
+		std::string	_nickname = "Bakunawa II";
 
 	void levelUpOnce()
 	{
@@ -128,4 +128,4 @@ int	main(void)
  * RESOURCES:
  * 	1. Getters() and setters(), and "this -> ":  <https://www.youtube.com/watch?v=5_GQw06deQg>
  *	2. 
- * /
+ */
