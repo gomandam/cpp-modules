@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 15:50:47 by gomandam          #+#    #+#             */
-/*   Updated: 2026/06/03 06:08:48 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/06/03 06:13:51 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,3 +124,8 @@ int	main(void)
 	return (0);
 }
 
+/*
+ * RESOURCES:
+ * 	1. Getters() and setters(), and "this -> ":  <https://www.youtube.com/watch?v=5_GQw06deQg>
+ *	2. 
+ * /
