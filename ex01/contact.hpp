@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 15:44:46 by gomandam          #+#    #+#             */
-/*   Updated: 2026/06/04 13:04:44 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/06/05 16:09:27 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ class Contact
 	std::string getNickName(void) const;
 	std::string getPhoneNumber(void) const;
 	std::string getDarkSecret(void) const;
+
+	std::string TEST = "test";
+	std::string TESTICLES = "testticles";
 
 	private:
 		std::string	_firstName;

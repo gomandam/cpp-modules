@@ -6,14 +6,14 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 20:07:38 by gomandam          #+#    #+#             */
-/*   Updated: 2026/06/04 14:45:26 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/06/05 16:10:39 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHONEBOOK_HPP
 #define PHONEBOOK_HPP
 
-#include "./Contact.hpp"
+#include "./contact.hpp"
 
 class Phonebook
 {

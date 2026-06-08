@@ -6,13 +6,13 @@
 /*   By: gomandam <gomandam@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/25 19:22:41 by gomandam          #+#    #+#             */
-/*   Updated: 2026/06/05 01:47:33 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/06/05 16:11:02 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./Contact.hpp"
+#include "./contact.hpp"
 
-// empty Constructor for C++98 compilation. Uses "::" Scope Resolution Operator.
+// empty Constructor for C++98 compilation. "::" Scope Resolution Operator.
 // "::" tells the compiler which class or namespace a function belongs to.
 // Constructor being defined outside the class
 Contact::Contact(void)
@@ -34,7 +34,7 @@ void	Contact::putContact(const std::string &firstName, const std::string &lastNa
 	_darkSecret = darkSecret;
 }
 
-// getter():  ,returns value of member variable 
+// getter(): reads without modifying, returns value of member variable
 std::string Contact::getFirstName(void) const {
 	return (_firstName);
 }
@@ -54,16 +54,3 @@ std::string Contact::getPhoneNumber(void) const {
 std::string Contact::getDarkSecret(void) const {
 	return (_darkSecret);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
