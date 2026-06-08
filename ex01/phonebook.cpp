@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/23 02:48:40 by gomandam          #+#    #+#             */
-/*   Updated: 2026/06/08 22:32:49 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/06/09 01:54:28 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ Phonebook::Phonebook(void) : _contactCount(0), _oldestIndex(0) {
 }
 
 // from class Phonebook to the member destructor ~Phonebook
-Phonebook::Phonebook(void) {
+Phonebook::~Phonebook(void) {
 }
 
 void	Phonebook::addContact(const Contact &contact)
@@ -57,22 +57,11 @@ void Phonebook::displayContacts(void) const
 	int	i = 0;
 	while (i < _contactCount)
 	{
-		std::cout << 
+		std::cout << "|" << std::setw(9) << i;
+		std::cout << "|" << std::setw(9) << _fitToWidth(_contacts[i].getFirstName(), 10);
+		std::cout << "|" << std::setw(9) << _fitToWidth(_contacts[i].getLastName(), 10);
+		std::cout << "|" << std::setw(9) << _fitToWidth(_contacts[i].getNickName(), 10);
+		std::cout << "|" << std::endl;
+		i++;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

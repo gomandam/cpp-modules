@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/25 19:22:41 by gomandam          #+#    #+#             */
-/*   Updated: 2026/06/05 16:11:02 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/06/09 01:50:02 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ Contact::Contact(void)
 {
 }
 
-~Contact::Contact(void)
+Contact::~Contact(void)
 {
 }
 

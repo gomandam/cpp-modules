@@ -6,11 +6,11 @@
 /*   By: gomandam <gomandam@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/23 05:46:10 by gomandam          #+#    #+#             */
-/*   Updated: 2026/05/29 20:24:06 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/06/09 01:50:53 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h> // exit status
+#include <cstdlib> // exit status
 #include <iostream>
 #include <cctype>
 #include <string>
