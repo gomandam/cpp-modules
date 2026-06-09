@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/23 05:46:10 by gomandam          #+#    #+#             */
-/*   Updated: 2026/06/09 03:24:56 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/06/09 12:07:23 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	isValidPhonenumber(const std::string &phone)
 	return (pos == std::string::npos);
 }
 
-void	cmdAdd(Phonebook &phonebook)
+void	manageAdd(Phonebook &phonebook)
 {
 	std::string firstName = getInput("Enter first name: ");
 	if (firstName.empty())
@@ -72,11 +72,29 @@ void	cmdAdd(Phonebook &phonebook)
 		return ;
 	}
 
-	// insert Class
+	Contact newContact;
+	newContact.putContact(firstName, lastName, nickName, phonenumber, darkSecret);
+	phonebook.addContact(newContact);
+	std::cout << "Contact added successfully!" << std::endl;
+}
+
+void	manageSearch(Phonebook &phonebook)
+{
+	if (phonebook.getContactCount() == 0)
+	{
+		std::cout << "Phonebook is empty." << std::endl;
+		return ; 
+	}
+
+	phonebook.displayContact();
+
+	std::string indexStr = getInput(indexStr.c_str());
+	phonebook.displayContact(index);
 }
 
 int	main(int argc, char *av[])
 {
+	Phonebook phonebook;
 	bool	workStatus;
 	std::string	cmd; // ADD, SEARCH, EXIT
 	
@@ -87,21 +105,15 @@ int	main(int argc, char *av[])
 	workStatus = true;
 	while (workStatus)
 	{
-		std::cout << "Please enter a command. (ADD, SEARCH, or EXIT): ";
-		std::getline(std::cin, cmd);
+		cmd = getInput("Please enter a command. (ADD, SEARCH, or EXIT): ");
 		if (std::cin.eof())
 			return (EXIT_FAILURE);
 		else if (cmd == "ADD")
-			std::cout << "ADD-function\n";
+			manageAdd(phonebook);
 		else if (cmd == "SEARCH")
-			std::cout << "SEARCH-function\n";
+			manageSearch(phonebook);
 		else if (cmd == "EXIT")
-		{
-			std::cout << "EXIT\n";
 			break;
-		}
-		else
-			std::cerr << "Invalid command input. Consider your life choices.\n";
 	}
 	return (EXIT_SUCCESS);
 }
