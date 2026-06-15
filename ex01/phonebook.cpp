@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/23 02:48:40 by gomandam          #+#    #+#             */
-/*   Updated: 2026/06/09 01:54:28 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/06/09 13:03:50 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,30 @@ void Phonebook::displayContacts(void) const
 	int	i = 0;
 	while (i < _contactCount)
 	{
-		std::cout << "|" << std::setw(9) << i;
-		std::cout << "|" << std::setw(9) << _fitToWidth(_contacts[i].getFirstName(), 10);
-		std::cout << "|" << std::setw(9) << _fitToWidth(_contacts[i].getLastName(), 10);
-		std::cout << "|" << std::setw(9) << _fitToWidth(_contacts[i].getNickName(), 10);
+		std::cout << "|" << std::setw(10) << i;
+		std::cout << "|" << std::setw(10) << _fitToWidth(_contacts[i].getFirstName(), 10);
+		std::cout << "|" << std::setw(10) << _fitToWidth(_contacts[i].getLastName(), 10);
+		std::cout << "|" << std::setw(10) << _fitToWidth(_contacts[i].getNickName(), 10);
 		std::cout << "|" << std::endl;
 		i++;
 	}
+}
+
+void	Phonebook::displayContact(int index) const
+{
+	if (index < 0 || index >= _contactCount)
+	{
+		std::cout << "Error: invalid index. \n";
+		return ;
+	}
+	std::cout << "First name: " << _contacts[index].getFirstName() << std::endl;
+	std::cout << "Last name: " << _contacts[index].getLastName() << std::endl;
+	std::cout << "Nickname: " << _contacts[index].getNickName() << std::endl;
+	std::cout << "Phone number: " << _contacts[index].getPhoneNumber() << std::endl;
+	std::cout << "Darkest Secret: " << _contacts[index].getDarkSecret() << std::endl;
+}
+
+int	Phonebook::getContactCount(void) const
+{
+	return (_contactCount);
 }
