@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/23 05:46:10 by gomandam          #+#    #+#             */
-/*   Updated: 2026/06/09 12:07:23 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/06/09 12:23:19 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #include <iostream> // standard
 #include <cctype>
 #include <string> 
-#include <cstdlib> // error handling
-#include <sstream> // std::isstringstream
 #include "./phonebook.hpp"
 #include "./contact.hpp"
 
@@ -30,7 +28,7 @@ std::string	getInput(const std::string &prompt)
 int	isValidPhonenumber(const std::string &phone)
 {
 	if (phone.empty())
-		return (EXIT_SUCCESS);
+		return (0);
 	size_t pos = phone.find_first_not_of("0123456789+- ");
 	return (pos == std::string::npos);
 }
@@ -86,9 +84,13 @@ void	manageSearch(Phonebook &phonebook)
 		return ; 
 	}
 
-	phonebook.displayContact();
+	phonebook.displayContacts();
 
-	std::string indexStr = getInput(indexStr.c_str());
+	std::string indexStr = getInput("Enter index: ");
+	if (indexStr.empty())
+		return ;
+
+	int	index = std::atoi(indexStr.c_str());
 	phonebook.displayContact(index);
 }
 
@@ -123,4 +125,4 @@ int	main(int argc, char *av[])
    	cin.eof()
 	string.compare()
 	getline(std::cin, s)
-
+*/
