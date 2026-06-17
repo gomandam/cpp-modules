@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 02:07:52 by gomandam          #+#    #+#             */
-/*   Updated: 2026/06/17 21:07:29 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/06/18 00:19:24 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ class Zombie
 };
 
 Zombie	*newZombie(std::string name);
-void	randomChump(std::string	name);
+// void	randomChump(std::string	name);
 Zombie	*zombieHorde(int n, std::string name);
 
 #endif

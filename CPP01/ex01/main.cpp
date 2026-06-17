@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 20:02:12 by gomandam          #+#    #+#             */
-/*   Updated: 2026/06/17 21:24:32 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/06/18 00:15:35 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 int	main(void)
 {
 	std::cout << "___ Zombie Horde Allocation ___" << std::endl << std::endl;
-	
-	std::cout << "__ Create Horde of Zombies ___" << std::endl;
+
+	std::cout << "___ Create Horde of Zombies ___" << std::endl;
 	Zombie *horde = zombieHorde(10, "Zoooooooooombies");
 	std::cout << std::endl;
 
@@ -30,7 +30,7 @@ int	main(void)
 	}
 	std::cout << std::endl;
 
-	std::cout << "__ Deallocate Horde of Zombies ___" << std::endl;
+	std::cout << "___ Deallocate Horde of Zombies ___" << std::endl;
 	delete[] horde;
 	std::cout << std::endl;
 
