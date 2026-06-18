@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 02:07:52 by gomandam          #+#    #+#             */
-/*   Updated: 2026/06/18 00:19:24 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/06/18 00:47:56 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ class Zombie
 	public:
 		Zombie(void);			// Default constructor
 		Zombie(std::string name);	// Constructor Parameter
-		~Zombie(void);
+		~Zombie(void);			// Destructor
 		void	announce(void);
 
 	private:
