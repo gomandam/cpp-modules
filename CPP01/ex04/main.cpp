@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/28 00:47:40 by gomandam          #+#    #+#             */
-/*   Updated: 2026/06/30 02:54:31 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/06/30 12:30:38 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ int	main(int argc, char *argv[])
 {
 	if (argc != 4)
 	{
-		std::cerr << "Invalid arguments." << std::endl;
+		std::cerr << "Error: Invalid arguments." << std::endl;
 		return (1);
 	}
-	Sed sed;
-	if (sed.processFile(argv[1], argv[2], argv[3]) != 0)
+	Sed sedObject;
+	if (sedObject.processFile(argv[1], argv[2], argv[3]) != 0)
 		return (1);
 	return (0);
 }

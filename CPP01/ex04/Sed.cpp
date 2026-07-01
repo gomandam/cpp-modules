@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/28 00:13:48 by gomandam          #+#    #+#             */
-/*   Updated: 2026/06/30 02:17:09 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/06/30 14:51:09 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,3 @@ int	Sed::processFile(const std::string& filename,
 	outfile.close();
 	return (0);
 }
-
