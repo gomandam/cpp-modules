@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/28 00:13:48 by gomandam          #+#    #+#             */
-/*   Updated: 2026/06/30 14:51:09 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/07/01 22:48:09 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,25 @@ Sed::~Sed()
 {
 }
 
+// find() searches for a substring within a string and returns the position index of first occurrences. Returns npos if nothing is found
+// empty() checks if a string is empty, no characters, returns "true" if empty
+
 std::string	Sed::replaceAllOccurences(const std::string& content,
 				const std::string& s1,
 				const std::string& s2)
 {
 	std::string	result;
 	std::string::size_type	start;	// size_type required by .find();
-	std::string::size_type	pos;
+	std::string::size_type	position;
 
 	start = 0;
-	pos = content.find(s1, start);
-	while (pos != std::string::npos)	// find() !if return = npos
+	position = content.find(s1, start);
+	while (position != std::string::npos)	// find() !if return = npos
 	{
-		result += content.substr(start, pos - start);
+		result += content.substr(start, position - start);
 		result += s2;
-		start = pos + s1.length();
-		pos = content.find(s1, start);
+		start = position + s1.length();
+		position = content.find(s1, start);
 	}
 	result += content.substr(start);
 	return (result);
@@ -81,8 +84,8 @@ int	Sed::processFile(const std::string& filename,
 	}
 
 	outfile << replaceAllOccurences(content, s1, s2);
-
-	if (!outfile.good())	// good()
+	
+	if (!outfile.good())
 	{
 		std::cerr << "Error: invalid writing output file." << std::endl;
 		outfile.close();
@@ -92,3 +95,9 @@ int	Sed::processFile(const std::string& filename,
 	outfile.close();
 	return (0);
 }
+
+// good() checks the overall state of the stream and returns true only if no error or end-of      -file conditions have occurred
+// close() member function of stream objects (like std::ifstream, std::ofstream) closes currently open file, disconnects the stream from file
+// is_open() checks whether file is currently open, and associated with the stream
+// c_str() returns a pointer to a null terminated C-style character array "(const char)*"
+// npos: static constant for no valid position, or not found

@@ -6,7 +6,7 @@
 #    By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/07/01 15:34:57 by gomandam          #+#    #+#              #
-#    Updated: 2026/07/01 16:17:49 by gomandam         ###   ########.fr        #
+#    Updated: 2026/07/01 22:24:55 by gomandam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SOURCES =	main.cpp \
 
 OBJECTS = $(SOURCES:.cpp=.o)
 
-RM = rm =rf
+RM = rm -rf
 
 all:	$(NAME)
 
