@@ -15,14 +15,9 @@ Learning the fundamentals and Modules for C++
 **Module 09**: Full-blown use of STL containers, iterators, and algorithms to implement tasks like complex string parsing and data sorting.
 
 ## Goal
-- Produce **C++98-compatible** solutions that match 42 subjects exactly.
+- **C++98-compatible** compilation standards.
 - Keep code **clean, readable, and evaluator-friendly**.
-
-## Compiling
-- Compile with:
-  - `c++ -Wall -Wextra -Werror`
-- Code must still compile if the evaluator adds:
-  - `-std=c++98`
+- Compile with: ** `c++ -Wall -Wextra -Werror -std=c++98` **
 
 ## Formatting & naming conventions
 - Exercise directories: `ex00`, `ex01`, ...
