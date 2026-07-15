@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/03 23:08:33 by gomandam          #+#    #+#             */
-/*   Updated: 2026/07/15 19:46:01 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/07/16 01:08:28 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include <iostream>
 #include <cmath>
-#include <cstdlib>
+#include <sstream>
 
 #define RawUnits 256	// _fractionalBits = 8, since BINARY is base(2) = 2^8
 
@@ -44,6 +44,8 @@ class Fixed
 		int			_fixedPointValue;
 		static int const	_fractionalBits = 8;
 };
+
+std::ostream& operator<<(std::ostream& out, const Fixed& value);
 
 #endif
 

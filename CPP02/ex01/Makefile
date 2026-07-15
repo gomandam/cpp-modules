@@ -6,11 +6,11 @@
 #    By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/07/02 15:46:50 by gomandam          #+#    #+#              #
-#    Updated: 2026/07/15 17:52:24 by gomandam         ###   ########.fr        #
+#    Updated: 2026/07/16 01:15:05 by gomandam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = fixedPoint 
+NAME = fixedPointConversion 
 
 COMPILER = c++
 
