@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/04 00:45:00 by gomandam          #+#    #+#             */
-/*   Updated: 2026/07/16 01:14:13 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/07/21 20:04:48 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,12 @@ Fixed& Fixed::operator=(const Fixed& other)
 	if (this != &other)
 		this->_fixedPointValue = other.getRawBits();
 	return (*this);
-
 }
 // Fixed-point number stores a real value as a scaled integer called Raw Units
 // With 8 fractional bits, 1 whole equals 256 (2^8) raw units, so the value is interpreted as rawBits / 256
 // 8 fractional bits means every 256 raw units represent 1 whole, allowing fractions represented efficiently.
 
-// ENCAPSULATION
+// ENCAPSULATION or ACCESSORS
 int	Fixed::getRawBits(void) const
 {
 	return (this->_fixedPointValue);

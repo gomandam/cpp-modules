@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/04 00:45:00 by gomandam          #+#    #+#             */
-/*   Updated: 2026/07/21 03:57:18 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/07/21 20:24:16 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ Fixed::Fixed(const float value)
 	_fixedPointValue = static_cast<int>(roundValue);
 }
 
-
 Fixed::Fixed(void)
 {	this->_fixedPointValue = 0;	}
 
 Fixed::~Fixed(void)
 {	}
 
+// *other* is a reference to a FIXED object, not a separate object on its own
 Fixed::Fixed(const Fixed & other)
 {
 	*this = other; // this->setRawBits(other.getRawBits());
