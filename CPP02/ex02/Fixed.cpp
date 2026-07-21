@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/04 00:45:00 by gomandam          #+#    #+#             */
-/*   Updated: 2026/07/21 02:51:16 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/07/21 03:57:18 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,10 @@ Fixed::Fixed(const float value)
 
 
 Fixed::Fixed(void)
-{
-	this->_fixedPointValue = 0;
-}
+{	this->_fixedPointValue = 0;	}
 
 Fixed::~Fixed(void)
-{
-}
+{	}
 
 Fixed::Fixed(const Fixed & other)
 {
@@ -51,7 +48,6 @@ Fixed& Fixed::operator=(const Fixed& other)
 	if (this != &other)
 		this->_fixedPointValue = other.getRawBits();
 	return (*this);
-
 }
 // Fixed-point number stores a real value as a scaled integer called Raw Units
 // With 8 fractional bits, 1 whole equals 256 (2^8) raw units, so the value is interpreted as rawBits / 256
@@ -59,14 +55,10 @@ Fixed& Fixed::operator=(const Fixed& other)
 
 // ENCAPSULATION
 int	Fixed::getRawBits(void) const
-{
-	return (this->_fixedPointValue);
-}
+{	return (this->_fixedPointValue);	}
 
 void	Fixed::setRawBits(int const raw)
-{
-	this->_fixedPointValue = raw;
-}
+{	this->_fixedPointValue = raw;	}
 
 // CONVERSIONS
 float	Fixed::toFloat(void) const
@@ -77,14 +69,13 @@ float	Fixed::toFloat(void) const
 }
 
 int	Fixed::toInt(void) const
-{
-	return (_fixedPointValue >> _fractionalBits);
-}
+{	return (_fixedPointValue >> _fractionalBits);	}
 // Faster calculation: bit-shift discards fractional bits, removes last binary digits
 // _fractionalBits = 8, binary base(2) 2^8 = 256
 
 // COMPARISON OPERATORS
-// EXPLAIN: basic sequence of bool in relationship to OPERATORS > < ... from this-> pointer object _fpv to other._fpv
+// Overload comparison operators: Fixed objects behave like built-in types (like int or float), enabling intuitive comparisons on the underlying fixed-point value.
+// Given the same name to multiple functions, but with different parameters
 bool	Fixed::operator>(const Fixed& other) const
 {	return (this->_fixedPointValue > other._fixedPointValue);	}
 
@@ -104,7 +95,8 @@ bool	Fixed::operator!=(const Fixed& other) const
 {	return (this->_fixedPointValue != other._fixedPointValue);	}
 
 // ARITHMETIC OPERATORS
-// EXPLAIN: code snippets from each since it is just operators being changed + - and * /
+// static polymorphism or function overloading
+// Operator from each arithmetic since it is just operators being changed + - and * /
 Fixed	Fixed::operator+(const Fixed& other) const
 {
 	Fixed	result;
@@ -120,18 +112,16 @@ Fixed	Fixed::operator-(const Fixed& other) const
 }
 
 Fixed	Fixed::operator*(const Fixed& other) const
-{
-	return (Fixed(this->toFloat() * other.toFloat()));
-}
+{	return (Fixed(this->toFloat() * other.toFloat()));	}
 
 Fixed	Fixed::operator/(const Fixed& other) const
-{
-	return (Fixed(this->toFloat() / other.toFloat()));
-}
+{	return (Fixed(this->toFloat() / other.toFloat()));	}
 
 // INCREMENT / DECREMENT OPERATORS
-// EXPLAIN: Difference between Fixed& ++ -- and Fixed Fixed ++ -- then comparison by having to use temp
-
+// Post-increment must return the old value, so it creates a temporary copy before modifying the object.
+// Pre-increment can return the modified object directly via reference—no copy needed.
+// PRE efficient (reference return, immediate modification), while POST preserves old value by copying (slower)
+// Increment/Decrement: member functions that modify state and return a value
 Fixed& Fixed::operator++(void)
 {
 	++this->_fixedPointValue;
@@ -159,32 +149,26 @@ Fixed	Fixed::operator--(int)
 }
 
 // STATIC	MIN / MAX
-// EXPLAIN: ternary operators help simplify if else statements, why does const Fixed& makes a difference,  
+// Ternary operators help simplify if else statements, const Fixed& makes a difference,  
 // const Fixed& not modifiable, const reference
+// Non-const version (Fixed&) lets you modify results when working with modifiable objects
+// Const version (const Fixed&) accepts any object (modifiable or const) but prevents modification of results
 Fixed&	Fixed::min(Fixed& a, Fixed& b)
-{
-	return (a < b ? a : b);
-}
+{	return (a < b ? a : b);		}
 
 const Fixed&	Fixed::min(const Fixed& a, const Fixed& b)
-{
-	return (a < b ? a : b);
-}
+{	return (a < b ? a : b);		}
 
 Fixed&	Fixed::max(Fixed& a, Fixed& b)
-{
-	return (a > b ? a : b);
-}
+{	return (a > b ? a : b);		}
 
 const Fixed&	Fixed::max(const Fixed& a, const Fixed& b)
-{
-	return (a > b ? a : b);
-}
+{	return (a > b ? a : b);		}
 
+//	STREAM INSERTION OVERLOAD
 std::ostream& operator<<(std::ostream& out, const Fixed& value)
 {
 	out << value.toFloat();
 	return (out);
 }
-//	STREAM INSERTION OVERLOAD
-//  	makes CLASS behave like a native c++ type, manual print without calling .toFloat(); 
+// makes CLASS behave like a native c++ type, manual print without calling .toFloat(); 
