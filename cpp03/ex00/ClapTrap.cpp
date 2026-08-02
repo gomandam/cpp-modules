@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 21:23:23 by gomandam          #+#    #+#             */
-/*   Updated: 2026/07/31 19:45:19 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/08/03 01:41:19 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 ClapTrap::ClapTrap(const std::string& name)
 	: _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0)
 {
-	std::cout << "ClapTrap " << _name << " constructed.\n";
+	std::cout << "[ClapTrap] " << _name << " was successfully constructed.\n";
 }
 
 ClapTrap::~ClapTrap(void)
 {
-	std::cout << "ClapTrap " << _name << " destroyed.\n";
+	std::cout << "[ClapTrap] " << _name << " was destroyed.\n";
 }
 
 ClapTrap::ClapTrap(const ClapTrap& other) : _name(other._name), _hitPoints(other._hitPoints),
@@ -71,22 +71,22 @@ void	ClapTrap::takeDamage(unsigned int amount)
 		_hitPoints = 0;
 	else
 		_hitPoints -= amount;
-	std::cout << "ClapTrap " << _name << " takes " << amount << " damage points. HP is now: " << _hitPoints << ". \n";
+	std::cout << "ClapTrap " << _name << " takes " << amount << " damage points. Hit points: " << _hitPoints << ". \n";
 }
 
 void	ClapTrap::beRepaired(unsigned int amount)
 {
 	if (_hitPoints <= 0)
 	{
-		std::cout << "ClapTrap " << _name << " can not repair, no HP left. \n";
+		std::cout << "ClapTrap " << _name << " can not repair, no hit points left. \n";
 		return ;
 	}
 	if (_energyPoints <= 0)
 	{
 		std::cout << "ClapTrap " << _name << " can not repair, no ENERGY POINTS left. \n";
+		return ;
 	}
 	_energyPoints -= 1;
 	_hitPoints += static_cast<int>(amount);
-	std::cout << "ClapTrap " << _name << " repairs itself with " << amount << " hit points. HP is now: " << _hitPoints << ". \n";
+	std::cout << "ClapTrap " << _name << " repairs itself with " << amount << " hit points. It is now: " << _hitPoints << ". \n";
 }
-
