@@ -6,18 +6,19 @@
 #    By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/07/23 21:22:01 by gomandam          #+#    #+#              #
-#    Updated: 2026/07/27 20:41:49 by gomandam         ###   ########.fr        #
+#    Updated: 2026/08/04 01:33:43 by gomandam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = claptrap
+NAME = scavtrap
 
 COMPILER = c++
 
 FLAGS = -Wall -Werror -Wextra -std=c++98
 
-SOURCES = main.cpp \
-	 ClapTrap.cpp
+SOURCES =	main.cpp \
+		ClapTrap.cpp \
+		ScavTrap.cpp
 
 OBJECTS = $(SOURCES:.cpp=.o)
 

@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 17:34:40 by gomandam          #+#    #+#             */
-/*   Updated: 2026/08/03 21:37:40 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/08/04 00:13:24 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ class ScavTrap : public ClapTrap				// INHERITANCE METHOD
 		ScavTrap& operator=(const ScavTrap& other);	// Copy Assignment Operator: assigns state of one object to another existing object
 
 	void	attack(const std::string& target);
-	void	guardGate();
+	void	guardGate(void);
 };
 
 #endif

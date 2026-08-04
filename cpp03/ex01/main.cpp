@@ -6,39 +6,39 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 21:23:02 by gomandam          #+#    #+#             */
-/*   Updated: 2026/08/03 01:37:23 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/08/04 02:00:57 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
 
 int	main(void)
 {
-	ClapTrap	objectA("Juggernaut");
+// CLAPTRAP
+	std::cout << "\n ******** CLAPTRAP TEST ******** " << std::endl;
+	ClapTrap	clap("Juggernaut II");	
+		clap.attack("the wall");
+		clap.takeDamage(3);
+		clap.beRepaired(1);
 
-	objectA.attack("((0._.0))");	// HP: 10  EP: 9
-	objectA.takeDamage(3);		// HP: 7   EP: 9
-	objectA.beRepaired(1);		// HP: 8   EP: 8
+// SCAVTRAP
+	std::cout << "\n ******** SCAVTRAP TEST ******** " << std::endl;
+	ScavTrap	scav("Fortress of Defence");
+		scav.attack("the intruder");
+		scav.guardGate();
+		scav.takeDamage(30);
+		scav.beRepaired(15);
+	std::cout << " ________ END BASIC TEST ________ " << std::endl; 
 
-// Energy Depletion			   HP: 8    EP: 7 -> 0
-	std::cout << "The Juggernaut wants to attack 10 times, with HP: 8\n";
-	for (int i = 0; i < 10; ++i)
-		objectA.attack("the wall of Gibraltar");
+// SCAVTRAP COPY
+	std::cout << "\n ******** SCAVTRAP TEST: COPY TEST ******** " << std::endl;
+	ScavTrap	monoptych("The artwork");
+	ScavTrap	diptych(monoptych);
+	ScavTrap	triptych("the replica");
 
-// No energy left			   HP: 8    EP: 0
-	objectA.attack("NPC");
-	objectA.beRepaired(1);
+	triptych = monoptych;
+	triptych.guardGate();
 	
-	objectA.attack("NPC");
-	objectA.beRepaired(1);
-
-
-// Kill ClapTrap			   HP: 0    EP: 0 
-	objectA.takeDamage(99);
-
-// No sufficient Hit Points		   HP: 0    EP: 0
-	objectA.attack("NPC");
-	objectA.beRepaired(1);
-
 	return (0);
 }
