@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 17:33:43 by gomandam          #+#    #+#             */
-/*   Updated: 2026/08/05 20:52:25 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/08/04 14:40:29 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	ScavTrap::attack(const std::string& target)
 		std::cout << "[ScavTrap] " << _name << " can't attack, insufficient HIT POINTS.\n";
 		return ;
 	}
-
 	if (_energyPoints <= 0)
 	{
 		std::cout << "[ScavTrap] " << _name << " can't attack, insufficient ENERGY POINTS.\n";
@@ -66,5 +65,6 @@ void	ScavTrap::attack(const std::string& target)
 
 void	ScavTrap::guardGate(void)
 {
-	std::cout << "[ScavTrap] " << _name << " used GUARD-GATE: specifier to control which base class parts can be accessed by derived class/outside code.\n";
+	std::cout << "[ScavTrap] " << _name << ": Guard Gate Activated.\n";
 }
+
