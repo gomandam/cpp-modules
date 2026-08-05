@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 21:23:02 by gomandam          #+#    #+#             */
-/*   Updated: 2026/08/05 20:57:47 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/08/06 00:37:54 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,3 +44,16 @@ int	main(void)
 	
 	return (0);
 }
+
+/* Keynotes:
+	1. Inheritance is done with ':' >> class FragTrap : public ClapTrap { };
+	2. FragTrap constructor explicitly calls ClapTrap() then overrides
+	3. Destructors: automatic reverse chaining (FragTrap then ClapTrap)
+	4. FragTrap adds: highFivesGuys();
+
+   Automatic Reverse Chaining:
+	Expected in the C++ lifetime, after the highFivesGuys() it will print the reverse chain.
+	'~' destructor automatically called when object dies: destroys the DERIVED class first, then BASE class (reverse chain).
+
+	Child-specific cleanup runs while BASE data/resources are valid.
+	Prevents unsafe access during teardown.	*/
