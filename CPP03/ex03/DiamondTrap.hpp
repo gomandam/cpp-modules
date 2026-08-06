@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/06 17:32:39 by gomandam          #+#    #+#             */
-/*   Updated: 2026/08/06 21:38:06 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/08/06 23:03:39 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ class DiamondTrap : public ScavTrap, public FragTrap		// Inheritance from Scav &
 		DiamondTrap(const DiamondTrap& other);
 		DiamondTrap& operator=(const DiamondTrap& other);
 
-	using	ScavTrap::attack;				// Explicit (manual) choice of attack
+	void	attack(const std::string& target);		// unique final override
 	void	whoAmI(void);
 
 	private:

@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/06 17:32:26 by gomandam          #+#    #+#             */
-/*   Updated: 2026/08/06 22:52:34 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/08/06 23:06:03 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,11 @@ DiamondTrap& DiamondTrap::operator=(const DiamondTrap& other)
 	}
 	std::cout << "[DiamondTrap] " << _name << " copy assigned.\n";
 	return (*this);
+}
+
+void	DiamondTrap::attack(const std::string& target)
+{
+	ScavTrap::attack(target);
 }
 
 void	DiamondTrap::whoAmI(void)

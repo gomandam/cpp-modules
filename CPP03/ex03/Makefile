@@ -6,15 +6,15 @@
 #    By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/07/23 21:22:01 by gomandam          #+#    #+#              #
-#    Updated: 2026/08/06 21:29:08 by gomandam         ###   ########.fr        #
+#    Updated: 2026/08/06 23:07:23 by gomandam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = fragtrap
+NAME = diamond_trapero
 
 COMPILER = c++
 
-FLAGS = -Wall -Werror -Wextra -std=c++98 -Wno-shadow
+FLAGS = -Wall -Werror -Wextra -std=c++98 -Wno-shadow -Wshadow
 
 SOURCES =	main.cpp \
 		ClapTrap.cpp \
