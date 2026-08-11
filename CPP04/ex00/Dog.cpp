@@ -6,14 +6,14 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 00:19:38 by gomandam          #+#    #+#             */
-/*   Updated: 2026/08/11 00:57:07 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/08/12 00:56:49 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Dog.hpp"
 #include "Animal.hpp"
 
-Dog::Dog(void)
+Dog::Dog(void) : Animal()
 {
 	_type = "Dog";
 	std::cout << "Dog constructor called.\n";

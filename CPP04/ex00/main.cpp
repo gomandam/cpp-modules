@@ -6,11 +6,13 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 18:11:55 by gomandam          #+#    #+#             */
-/*   Updated: 2026/08/10 18:13:03 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/08/12 00:25:30 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "polymorphism.hpp"
+#include "Animal.hpp"
+#include "Cat.hpp"
+#include "Dog.hpp"
 
 int	main(void)
 {

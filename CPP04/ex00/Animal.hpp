@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 18:08:22 by gomandam          #+#    #+#             */
-/*   Updated: 2026/08/11 00:33:18 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/08/12 00:58:36 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ class Animal
 {
 	public:
 		Animal(void);
-	virtual	~Animal(void);					// 
+	virtual	~Animal(void);					// virtual Destructor: ensures DERIVED destructor (Animal as BASE class) called through base pointer
 
 		Animal(const Animal& other);
 		Animal& operator=(const Animal& other);

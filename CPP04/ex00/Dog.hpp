@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 18:08:22 by gomandam          #+#    #+#             */
-/*   Updated: 2026/08/11 00:48:26 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/08/12 00:59:59 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,13 @@ class Dog : public Animal
 		Dog(const Dog& other);
 		Dog& operator=(const Dog& other);
 
-	void	makeSound() const;
+	void	makeSound() const;			// since Animal.hpp had a virtual function (abstract class), this overrides the same function (for Dog class)
 };
 
 #endif
+
+/*
+	makeSound() const; now has Dog Class specific implementation
+
+
+*/
