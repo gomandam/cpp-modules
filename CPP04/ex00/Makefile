@@ -6,7 +6,7 @@
 #    By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/08/10 14:38:59 by gomandam          #+#    #+#              #
-#    Updated: 2026/08/10 18:06:20 by gomandam         ###   ########.fr        #
+#    Updated: 2026/08/12 01:19:51 by gomandam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,11 @@ COMPILER = c++
 FLAGS = -Wall -Werror -Wextra -std=c++98
 
 SOURCES = main.cpp \
-	  polymorphism.cpp 
+	  Animal.cpp \
+	  Dog.cpp \
+	  Cat.cpp \
+	  WrongAnimal.cpp \
+	  WrongCat.cpp 
 
 OBJECTS = $(SOURCES:.cpp=.o)
 
