@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 00:19:38 by gomandam          #+#    #+#             */
-/*   Updated: 2026/08/11 01:01:12 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/08/14 01:31:29 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ Cat::Cat(void)
 
 Cat::~Cat(void)
 {
-	std::cout << "Cat destructor called\n";
+	std::cout << "Cat destructor called.\n";
 }
 
 Cat::Cat(const Cat& other) : Animal(other)

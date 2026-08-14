@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 00:19:38 by gomandam          #+#    #+#             */
-/*   Updated: 2026/08/12 00:56:49 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/08/14 02:24:26 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ Dog::Dog(void) : Animal()
 
 Dog::~Dog(void)
 {
-	std::cout << "Dog destructor called\n";
+	std::cout << "Dog destructor called.\n";
 }
 
 Dog::Dog(const Dog& other) : Animal(other)
