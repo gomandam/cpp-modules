@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 18:08:22 by gomandam          #+#    #+#             */
-/*   Updated: 2026/08/11 01:02:36 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/08/14 03:05:56 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,6 @@ class Cat : public Animal
 		Cat& operator=(const Cat& other);
 
 	void	makeSound() const;
-
-	protected:
-		std::string	type;
 };
 
 #endif

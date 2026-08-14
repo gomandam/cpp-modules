@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 18:08:22 by gomandam          #+#    #+#             */
-/*   Updated: 2026/08/12 01:09:54 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/08/14 04:01:19 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,7 @@ class WrongCat : public WrongAnimal
 		WrongCat& operator=(const WrongCat& other);
 
 	void	makeSound() const;
-
-	protected:
-		std::string	type;
+	// WrongCat overrides, WrongAnimal not called
 };
 
 #endif

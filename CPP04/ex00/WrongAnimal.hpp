@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 18:08:22 by gomandam          #+#    #+#             */
-/*   Updated: 2026/08/12 01:04:09 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/08/14 04:01:56 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,15 @@ class WrongAnimal
 	public:
 		WrongAnimal(void);
 		~WrongAnimal(void);
+		// NOT VIRTUAL: intentional to have comparison
 
 		WrongAnimal(const WrongAnimal& other);
 		WrongAnimal& operator=(const WrongAnimal& other);
 
-	void	makeSound() const;
 	std::string getType(void) const;
+	void	makeSound() const;
+	// NOT VIRTUAL: showcase intentional problem, static handling
+	//  WrongCat overrides, WrongAnimal not called
 
 	protected:
 	std::string	_type;
