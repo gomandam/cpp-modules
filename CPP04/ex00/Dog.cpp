@@ -6,14 +6,15 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 00:19:38 by gomandam          #+#    #+#             */
-/*   Updated: 2026/08/14 02:24:26 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/08/14 03:32:23 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Dog.hpp"
 #include "Animal.hpp"
 
-Dog::Dog(void) : Animal()
+Dog::Dog(void)	/*	: Animal()
+		Explicit call is redundant. BASE constructor automatically called */
 {
 	_type = "Dog";
 	std::cout << "Dog constructor called.\n";
