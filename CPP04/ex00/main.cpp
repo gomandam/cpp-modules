@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 18:11:55 by gomandam          #+#    #+#             */
-/*   Updated: 2026/08/14 02:43:30 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/08/14 04:04:21 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,13 @@
 #include "WrongAnimal.hpp"
 #include "WrongCat.hpp"
 
+// INHERITANCE: "IS-A/An" Relationship
+// POLYMORPHISM: enabled by VIRTUAL functions
+
 int	main(void)
 {
 // Base Class Pointer: Initialized to a new allocated object >> Animal, Dog, Cat
-// Foundation of Polymorphism: "IS-A/An" Relationship
+// "IS-A/An" relationship enables POLYMORPHISM through virtual function
 	std::cout << "================================================== \n";
 	std::cout << "           Class Pointer: Allocate *new*           \n";
 	std::cout << "================================================== \n";
@@ -58,13 +61,15 @@ int	main(void)
 	std::cout << "================================================== \n";
 // Broken Polymorphism: Illustrates a wrong implementation usisng NON-virtual
 	const WrongAnimal* xAnimal	= new WrongAnimal();
-	const WrongCat*    xCat		= new WrongCat();
+	const WrongAnimal* xCat		= new WrongCat();
 
 	std::cout << "\n================================================== \n";
 	std::cout <<   "      TEST: makeSound() Non-virtual (Broken)       \n";
 	std::cout <<   "================================================== \n";
 // WrongCat & WrongAnimal: exactly the same, but without VIRTUAL implementation
 // Without VIRTUAL: shows problems, CORRECT OUTPUT: "meow!"
+
+// Calls WrongCat::makeSound() at compile time
 	xCat->makeSound();
 // Calls WrongAnimal::makeSound() at compile time
 	xAnimal->makeSound();
@@ -72,7 +77,7 @@ int	main(void)
 	std::cout << "\n================================================== \n";
 	std::cout <<   "   TEST: Clean-up Destructors (WITHOUT VIRTUAL)    \n";
 	std::cout <<   "================================================== \n";
-// DELETE: without VIRTUAL, 
+// DELETE: without VIRTUAL 
 	delete	xAnimal;
 	delete	xCat;
 
@@ -89,13 +94,13 @@ int	main(void)
 	objectCat.makeSound();
 	std::cout << std::endl;
 
+	std::cout << "\n================================================== \n";
+	std::cout <<   "        END: Clean Stack Allocated Objects         \n";
+	std::cout <<   "================================================== \n";
+// When objectDog&Cat ends scope at function return: automatically called at end of life-cycle
+// via ~Destructor chain, Animal::~Animal() is automatically called too.
+// DELETE: not necessary since these are stack objects
 
 	return (0);
+// return (0); triggers destruction of objectDog & objectCat (stack unwinding)
 }
-
-
-/* THINGS TO DO: review functions, and implementations
- 	I.  CHECK WHICH ONES SHOULD BE VIRTUAL, is it only ANIMAL.hpp or CAT & DOG
-	II. 
-
-*/
