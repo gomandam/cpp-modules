@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 18:11:55 by gomandam          #+#    #+#             */
-/*   Updated: 2026/08/15 23:59:06 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/08/15 23:59:40 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 #include "WrongCat.hpp"
 
 // INHERITANCE: "IS-A/An" Relationship
-
 // POLYMORPHISM: enabled by VIRTUAL functions
 
 int	main(void)
