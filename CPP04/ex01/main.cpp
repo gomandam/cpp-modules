@@ -6,101 +6,79 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 18:11:55 by gomandam          #+#    #+#             */
-/*   Updated: 2026/08/15 23:59:40 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/08/17 00:21:12 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Animal.hpp"
 #include "Cat.hpp"
 #include "Dog.hpp"
-#include "WrongAnimal.hpp"
-#include "WrongCat.hpp"
+#include "Brain.hpp"
 
-// INHERITANCE: "IS-A/An" Relationship
-// POLYMORPHISM: enabled by VIRTUAL functions
-
-int	main(void)
+// Verify polymorphic allocation/deletion through Animal*
+// Creates Dog (0-4) & Cat (5-9) -> Deletes (0-9) array
+// NOTE: both Dog/Cat casted to Animal* for C++98 compliance
+static void	arrayTest(void)
 {
-// Base Class Pointer: Initialized to a new allocated object >> Animal, Dog, Cat
-// "IS-A/An" relationship enables POLYMORPHISM through virtual function
-	std::cout << "================================================== \n";
-	std::cout << "           Class Pointer: Allocate *new*           \n";
-	std::cout << "================================================== \n";
-	const Animal* animal 	= new Animal();
-	std::cout << std::endl;
-	const Animal* dog 	= new Dog();
-	std::cout << std::endl;
-	const Animal* cat 	= new Cat();
-	std::cout << std::endl;
-
-	std::cout << "================================================== \n";
-	std::cout << "         TESTS: getType() and makeSound()          \n";
-	std::cout << "================================================== \n";
-// getType() returns a string "the type" via (std::cout) while VIRTUAL makeSound() returns void
-	std::cout << animal->getType() << ": ";
-	animal->makeSound();
+	const int	size = 10;
+	Animal*		animals[size];
 	
+	std::cout << "======== array[10] (5 Dogs,5 Cats) ========\n";
+	for (int i = 0; i < size; ++i )
+		animals[i] = (i < size / 2) ? (Animal*)new Dog() : (Animal*)new Cat();
+	for (int i = 0; i < size; ++i)
+		delete	animals[i];
+}
+
+// Runtime polymorphism (virtual makeSound)
+// Call makeSound() through Animal* pointing to Dog/Cat
+static void	soundTest(void)
+{
+	const Animal*	dog = new Dog();
+	const Animal*	cat = new Cat();
+
+	std::cout << "======= makeSound->(virtual access) =======\n";
 	std::cout << dog->getType() << ": ";
 	dog->makeSound();
 	std::cout << cat->getType() << ": ";
 	cat->makeSound();
-	
-	std::cout << "\n================================================== \n";
-	std::cout <<   "     TEST: Cleanup with Destructors (VIRTUAL)      \n";
-	std::cout <<   "================================================== \n";
-// Delete objects: Free memory from leaks, VIRTUAL so we don't call BASE destructor 
-	delete	animal;
-	std::cout << std::endl;
-	delete	dog;
-	std::cout << std::endl;
-	delete	cat;
-	std::cout << std::endl;
 
-	std::cout << "================================================== \n";
-	std::cout << "TEST: Demonstration Non-virtual (Not Polymorphism) \n";
-	std::cout << "================================================== \n";
-// Broken Polymorphism: Illustrates a wrong implementation usisng NON-virtual
-	const WrongAnimal* xAnimal	= new WrongAnimal();
-	const WrongAnimal* xCat		= new WrongCat();
+	delete	dog;	delete	cat;	std::cout << std::endl;
+}
 
-	std::cout << "\n================================================== \n";
-	std::cout <<   "      TEST: makeSound() Non-virtual (Broken)       \n";
-	std::cout <<   "================================================== \n";
-// WrongCat & WrongAnimal: exactly the same, but without VIRTUAL implementation
-// Without VIRTUAL: shows problems, CORRECT OUTPUT: "meow!"
+// Cat copies are independent Brain objects (deep)
+// Copies a Cat, modify copied Brain idea, check original if stays unchanged. 
+static void	deepCopyTest(void)
+{
+	Cat	orignal;
+	Cat	copy;
 
-// Calls WrongCat::makeSound() at compile time
-	xCat->makeSound();
-// Calls WrongAnimal::makeSound() at compile time
-	xAnimal->makeSound();
+	std::cout << "======= Deep Copy Test (Cat Brains) =======\n";
+	orignal.getBrain()->setIdea(0, "Original thought.");
+	copy = orignal;
+	copy.getBrain()->setIdea(0, "Replica of the idea.");
 
-	std::cout << "\n================================================== \n";
-	std::cout <<   "   TEST: Clean-up Destructors (WITHOUT VIRTUAL)    \n";
-	std::cout <<   "================================================== \n";
-// DELETE: without VIRTUAL 
-	delete	xAnimal;
-	delete	xCat;
+	std::cout << "Original idea[0]: " << orignal.getBrain()->getIdea(0) << std::endl;
+	std::cout << "Replica idea[0]: " << copy.getBrain()->getIdea(0) << std::endl;
+}
 
-	std::cout << "\n================================================== \n";
-	std::cout <<   "        TEST: Direct Object Instantiation          \n";
-	std::cout <<   "================================================== \n";
-// NO POINTERS: Stack allocation, not heap. Constructor called directly. makeSound() direct member called OBJECT
-	// No polymorphism needed. Dog at compile time. Direct call Dog::makeSound()
-	Dog	objectDog;
-	objectDog.makeSound();
-	std::cout << std::endl;
-	// No polymorphism needed. Cat at compile time. Direct call Cat::makeSound()
-	Cat	objectCat;
-	objectCat.makeSound();
-	std::cout << std::endl;
 
-	std::cout << "\n================================================== \n";
-	std::cout <<   "        END: Clean Stack Allocated Objects         \n";
-	std::cout <<   "================================================== \n";
-// When objectDog&Cat ends scope at function return: automatically called at end of life-cycle
-// via ~Destructor chain, Animal::~Animal() is automatically called too.
-// DELETE: not necessary since these are stack objects
+static void	subjectTest(void)
+{
+	const Animal*	a = new Dog();
+	const Animal*	b = new Cat();
 
+	std::cout << "======== Subject Test (cpp04/ex01) ========\n";
+	delete	a;
+	delete	b;
+	std::cout << "===================END=====================\n";
+}
+
+int	main(void)
+{
+	arrayTest();
+	soundTest();
+	deepCopyTest();
+	subjectTest();
 	return (0);
-// return (0); triggers destruction of objectDog & objectCat (stack unwinding)
 }
