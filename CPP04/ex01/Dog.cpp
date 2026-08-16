@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/11 00:19:38 by gomandam          #+#    #+#             */
-/*   Updated: 2026/08/16 07:10:46 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/08/16 07:18:36 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ Dog::Dog(void) : Animal(), _brain(new Brain())
 
 Dog::~Dog(void)
 {
+	delete	_brain;
 	std::cout << "Dog destructor called.\n";
 }
 
