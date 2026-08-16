@@ -6,7 +6,7 @@
 #    By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/08/10 14:38:59 by gomandam          #+#    #+#              #
-#    Updated: 2026/08/16 03:56:46 by gomandam         ###   ########.fr        #
+#    Updated: 2026/08/17 00:13:19 by gomandam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ SOURCES = main.cpp \
 	  Dog.cpp \
 	  Cat.cpp \
 	  WrongAnimal.cpp \
-	  WrongCat.cpp 
+	  WrongCat.cpp \
+	  Brain.cpp 
 
 OBJECTS = $(SOURCES:.cpp=.o)
 
