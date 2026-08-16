@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/16 06:21:45 by gomandam          #+#    #+#             */
-/*   Updated: 2026/08/16 06:37:58 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/08/17 00:35:25 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,11 @@ Brain::Brain(const Brain& other)
 
 Brain& Brain::operator=(const Brain& other)
 {
-	int	i = 0;
-	while (i < 100)
+	std::cout << "Brain copy assignment operator called.\n";
+	if (this != &other)
 	{
-		std::cout << "Brain copy assignment operator called.\n";
-		if (this != &other) {
-			while (i < 100)	{
-				_ideas[i] = other._ideas[i];
-				++i;
-			}
-		}
+		for (int i = 0; i < 100; ++i)
+			_ideas[i] = other._ideas[i];
 	}
 	return (*this);
 }
