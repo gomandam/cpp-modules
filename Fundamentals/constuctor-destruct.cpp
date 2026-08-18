@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 00:35:57 by gomandam          #+#    #+#             */
-/*   Updated: 2026/06/08 17:17:35 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/08/18 23:24:02 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,12 @@ class Character
 	}
 // Constructor overloading: compile error occurs when a constructor has the same function call even with different parameters
 // Setting all arguments with DEFAULT == Call with zero arguments; Hence  default constructor, creating a conflict
-	
+
+	~Character(void)
+	{
+	}
+// Destructor
+
 /********************************************/
 	private:
 		std::string _hero;
