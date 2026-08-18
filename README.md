@@ -3,7 +3,7 @@ Learning the fundamentals and Modules for C++
   
 ## Modules
 
-**Module 00**: Basics of C++ sytnax and the concept of classes, and helped move beyond a C-style approach to string manipulation.\
+**Module 00**: Basics of C++ syntax and the concept of classes, and helped move beyond a C-style approach to string manipulation.\
 **Module 01**: Memory allocation, references, pointers to members.\
 **Module 02**: Learn ad-hoc polymorphism, operator overloading, and implement the orthodox canonical form (default constructor, copy constructor, copy assignment operator, destructor).\
 **Module 03**: Dive into inheritance, base and derived classes, protected class members.\
