@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   class.cpp                                          :+:      :+:    :+:   */
+/*   1class.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gomandam <gomandam@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 20:29:06 by gomandam          #+#    #+#             */
-/*   Updated: 2026/05/23 00:48:50 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/08/21 18:43:34 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ int	main(void)
 	std::cout << "Age: " << string_result << std::endl;
 	std::cout << "The great " << human1.name << std:: endl;
 	
-	std::cout << "Print Memory Address of 'Age': " << str_age << std::endl;
-
+//	std::cout << "Print Memory Address of 'Age': " << str_age << std::endl;
 //	string age_ = to_string(human1.age);
 //	result << atoi(human1.age);	
 //	std::cout << "Age: " << result << std:: endl;
