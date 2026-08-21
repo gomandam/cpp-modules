@@ -1,17 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   seasons.cpp                                        :+:      :+:    :+:   */
+/*   switchcase.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gomandam <gomandam@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 02:19:21 by gomandam          #+#    #+#             */
-/*   Updated: 2026/05/26 03:53:08 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/08/22 01:45:09 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // SWITCH-CASES: useful for sequential or cascading cases,
 //	instead of using IF cases and FOR loops
+
+// Implement in CPP
 
 #include <iostream>
 
