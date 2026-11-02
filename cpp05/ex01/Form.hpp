@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/30 17:06:41 by gomandam          #+#    #+#             */
-/*   Updated: 2026/10/10 00:33:46 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/11/02 21:49:49 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ class Form
 {
 	private:
 		const std::string	_name;
-		bool _signed;
-		const int	_gradeToSign;
-		const int	_gradeToExecute;
+		bool			_signed;
+		const int		_gradeToSign;
+		const int		_gradeToExecute;
 
 	public:
 		Form(const  std::string& name, int gradetoSign, int gradetoExecute);
@@ -39,15 +39,15 @@ class Form
 	class	gradeTooHighException : public std::exception
 	{
 		public:
-			const char*  what() const throw()
-			{	return "Grade too high!";	}
+			const char*  what() const  throw() 
+//			{	return "Grade too high!";	}
 	}
 
 	class	gradeTooLowException : public std::exception
 	{
 		public:
 			const char* what() const throw()
-			{	return "Grade too Low!";	}
+//			{	return "Grade too Low!";	}
 	}
 };
 
