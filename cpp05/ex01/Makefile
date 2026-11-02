@@ -6,7 +6,7 @@
 #    By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/08/10 14:38:59 by gomandam          #+#    #+#              #
-#    Updated: 2026/09/23 19:03:00 by gomandam         ###   ########.fr        #
+#    Updated: 2026/11/02 23:13:03 by gomandam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ COMPILER = c++
 FLAGS = -Wall -Werror -Wextra -std=c++98 -pedantic
 
 SOURCES = main.cpp \
+	  Form.cpp \
 	  Bureaucrat.cpp
 
 OBJECTS = $(SOURCES:.cpp=.o)

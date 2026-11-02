@@ -6,14 +6,14 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/30 17:06:30 by gomandam          #+#    #+#             */
-/*   Updated: 2026/11/02 21:50:27 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/11/02 23:27:30 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <Form.hpp>
-#include <Bureaucrat.hpp>
+#include "Form.hpp"
+#include "Bureaucrat.hpp"
 
-Form::Form(const std::string name, const int  sign_grade, const int  execute_grade)
+Form::Form(const std::string& name, const int  sign_grade, const int  execute_grade)
 {
 	_name = name;
 	_signed = false;
