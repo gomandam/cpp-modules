@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/30 17:06:41 by gomandam          #+#    #+#             */
-/*   Updated: 2026/11/03 15:37:32 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/11/03 22:02:52 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,21 @@ class Form
 		Form(const Form& other);
 		Form& operator=(const Form& other);
 
-		const std::string&	getName() const;
+		const 	std::string&	getName() const;
 		bool	returnSigned() const;
 		int	getGradeSign() const;
 		int	getGradeExecute() const;
-
+		
 		void	beSigned(const Bureaucrat& cat); // Throws: if grade low
 
-	class	gradeTooHighException : public std::exception
+	class	GradeTooHighException : public std::exception
 	{
 		public:
 			const char*  what() const  throw(); 
 //			{	return "Grade too high!";	}
 	};
 
-	class	gradeTooLowException : public std::exception
+	class	GradeTooLowException : public std::exception
 	{
 		public:
 			const char* what() const throw();

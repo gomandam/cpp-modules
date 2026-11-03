@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 13:26:42 by gomandam          #+#    #+#             */
-/*   Updated: 2026/10/09 17:54:27 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/11/03 22:12:55 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 #include <iostream>
 #include <string>
 #include <exception> // try & catch
+
+// Forward declaration "Form": signForm usable
+class Form;
 
 class	Bureaucrat
 {
@@ -36,6 +39,8 @@ class	Bureaucrat
 
 		void	incrementGrade();
 		void	decrementGrade();
+		
+		void	signForm(Form& form) const;	// Mandatory as Bureaucrat member fx
 
 	class	GradeTooHighException : public std::exception
 	{

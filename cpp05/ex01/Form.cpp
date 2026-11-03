@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/30 17:06:30 by gomandam          #+#    #+#             */
-/*   Updated: 2026/11/03 15:48:01 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/11/03 22:07:49 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,18 @@
 // "const" can't be assigned later inside the constructor body.
 
 Form::Form(const std::string& name, const int  sign_grade, const int  execute_grade) :
-  _name(name), _signed(false), _gradeToSign(sign_grade), _gradeToExecute(execute_grade) { }
+  _name(name), _signed(false), _gradeToSign(sign_grade), _gradeToExecute(execute_grade)
+{
+	if (_gradeToSign < 1 || _gradeToExecute < 1)
+		throw GradeTooHighException();
+	if (_gradeToSign > 150 || _gradeToExecute > 150)
+		throw GradeTooLowException();
+}
 
 Form::Form() : _name("Default"), _signed(false), _gradeToSign(150), _gradeToExecute(150)
-{	std::cout << "Form Default Constructor.\n";	}
+{
+	std::cout << "Form Default Constructor.\n";
+}
 
 Form::~Form()	{ }
 
@@ -41,7 +49,7 @@ void	Form::beSigned(const Bureaucrat &cat)
 	if (cat.getGrade() <= _gradeToSign)
 		_signed = true;
 	else
-		throw gradeTooLowException();
+		throw GradeTooLowException();
 }
 // class name (a type), can not be passed as object. use the parameter
 
@@ -58,12 +66,26 @@ int	Form::getGradeExecute() const
 {	return (_gradeToExecute);	}
 
 // Exceptions
-const char	*Form::gradeTooHighException::what() const throw()
+const char	*Form::GradeTooHighException::what() const throw()
 {
 	return ("[exception] Grade to High.");
 }
 
-const char	*Form::gradeTooLowException::what() const throw()
+const char	*Form::GradeTooLowException::what() const throw()
 {
 	return ("[exception] Grade to Low.");
+}
+
+void	Bureaucrat::signForm(Form& form) const
+{
+	try
+	{
+		form.beSigned(*this);
+		std::cout << getName() << " signed " << form.getName() << std::endl;
+	}
+	catch (const std::exception& error)
+	{
+		std::cout << getName() << " can not sign " << form.getName()
+			  << " because " << error.what() << std::endl;
+	}
 }
