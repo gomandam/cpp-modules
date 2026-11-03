@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/30 17:06:41 by gomandam          #+#    #+#             */
-/*   Updated: 2026/11/02 23:17:11 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/11/03 15:37:32 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@ class Form
 		const int		_gradeToExecute;
 
 	public:
-		Form(const  std::string& name, const int gradetoSign, const int gradetoExecute);
+		Form();
+		~Form();
+		Form(const std::string& name, const int sign_grade, const int execute_grade);
 		Form(const Form& other);
 		Form& operator=(const Form& other);
-		~Form();
 
 		const std::string&	getName() const;
 		bool	returnSigned() const;
