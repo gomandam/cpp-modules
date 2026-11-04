@@ -6,17 +6,18 @@
 #    By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/08/10 14:38:59 by gomandam          #+#    #+#              #
-#    Updated: 2026/09/23 19:03:00 by gomandam         ###   ########.fr        #
+#    Updated: 2026/11/03 22:14:02 by gomandam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = bureaucrat 
+NAME = form 
 
 COMPILER = c++
 
 FLAGS = -Wall -Werror -Wextra -std=c++98 -pedantic
 
 SOURCES = main.cpp \
+	  Form.cpp \
 	  Bureaucrat.cpp
 
 OBJECTS = $(SOURCES:.cpp=.o)

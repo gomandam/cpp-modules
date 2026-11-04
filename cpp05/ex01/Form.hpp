@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/30 17:06:41 by gomandam          #+#    #+#             */
-/*   Updated: 2026/10/10 00:33:46 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/11/03 22:02:52 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,36 +19,37 @@ class Form
 {
 	private:
 		const std::string	_name;
-		bool _signed;
-		const int	_gradeToSign;
-		const int	_gradeToExecute;
+		bool			_signed;
+		const int		_gradeToSign;
+		const int		_gradeToExecute;
 
 	public:
-		Form(const  std::string& name, int gradetoSign, int gradetoExecute);
+		Form();
+		~Form();
+		Form(const std::string& name, const int sign_grade, const int execute_grade);
 		Form(const Form& other);
 		Form& operator=(const Form& other);
-		~Form();
 
-		const std::string&	getName() const;
+		const 	std::string&	getName() const;
 		bool	returnSigned() const;
 		int	getGradeSign() const;
 		int	getGradeExecute() const;
-
+		
 		void	beSigned(const Bureaucrat& cat); // Throws: if grade low
 
-	class	gradeTooHighException : public std::exception
+	class	GradeTooHighException : public std::exception
 	{
 		public:
-			const char*  what() const throw()
-			{	return "Grade too high!";	}
-	}
+			const char*  what() const  throw(); 
+//			{	return "Grade too high!";	}
+	};
 
-	class	gradeTooLowException : public std::exception
+	class	GradeTooLowException : public std::exception
 	{
 		public:
-			const char* what() const throw()
-			{	return "Grade too Low!";	}
-	}
+			const char* what() const throw();
+//			{	return "Grade too Low!";	}
+	};
 };
 
 inline	std::ostream& operator<<(std::ostream& os, const Form& form)
