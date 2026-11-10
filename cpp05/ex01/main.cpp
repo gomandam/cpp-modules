@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 13:26:33 by gomandam          #+#    #+#             */
-/*   Updated: 2026/11/03 21:12:10 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/11/04 17:11:31 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	main(void)
 	std::cout << "\n=== Signing a form ===" << std::endl;
 
 	// Set up a form and bureaucrats to test both insufficient and sufficient signing grades.
-	Form travelRequest("Travel request", 50, 25);
+	Form travelRequest("Travel Request", 50, 25);
 	Bureaucrat juniorClerk("Junior Clerk", 100);
 	Bureaucrat seniorClerk("Senior Clerk", 25);
 
