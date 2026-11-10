@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/05 15:31:43 by gomandam          #+#    #+#             */
-/*   Updated: 2026/11/06 19:43:00 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/11/10 16:05:24 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ class	AForm
 	private:
 		const std::string	_name;
 		bool			_signed;
-		const int		_gradteToSign;
-		const int		_gradteToExecute;
+		const int		_gradeToSign;
+		const int		_gradeToExecute;
 
 	public:
 		AForm();

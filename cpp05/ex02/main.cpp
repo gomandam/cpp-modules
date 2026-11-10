@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 13:26:33 by gomandam          #+#    #+#             */
-/*   Updated: 2026/11/10 15:41:22 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/11/10 16:09:27 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,11 @@ int	main(void)
 	Bureaucrat king("King", 1);
 	Bureaucrat pawn("Pawn", 140);
 
-
 	std::cout << "\n============EDGE CASES============\n";
 
 	
 	
-	
+
 	std::cout << "\n=========INVALID INSTANCE=========\n";
 	
 	
