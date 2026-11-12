@@ -6,17 +6,12 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/05 15:31:43 by gomandam          #+#    #+#             */
-/*   Updated: 2026/11/10 16:05:24 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/11/11 20:49:52 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef	AFORM_HPP
 #define	AFORM_HPP
-
-#include <iostream>
-#include <string>
-#include <exception>
-#include <fstream>
 
 class	AForm
 {

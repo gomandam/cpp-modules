@@ -6,13 +6,17 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 13:26:33 by gomandam          #+#    #+#             */
-/*   Updated: 2026/11/10 16:09:27 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/11/11 20:49:16 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 #include "Form.hpp"
 #include "AForm.hpp"
+
+#include <iostream>
+#include <string>
+#include <exception>	// try & catch
 
 #include <cstdlib>	// std::srand
 #include <ctime>	// std::time
@@ -22,7 +26,7 @@ int	main(void)
 {
 	std::cout << "\n==================================\n";
 
-	std::srand(std::time(NULL));	// generates a random number
+	std::srand(std::time(NULL));	// generates a seed for random number
 
 	Bureaucrat king("King", 1);
 	Bureaucrat pawn("Pawn", 140);

@@ -6,11 +6,14 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 13:26:33 by gomandam          #+#    #+#             */
-/*   Updated: 2026/10/06 11:12:13 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/11/12 03:42:04 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+#include "AForm.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
 
 // CONSTRUCTORS
 Bureaucrat::Bureaucrat() : _name("[DEFAULT]"), _grade(150)
@@ -23,7 +26,7 @@ Bureaucrat::Bureaucrat(const Bureaucrat &other) : _name(other._name), _grade(oth
 
 Bureaucrat::~Bureaucrat()
 {
-	std::cout << "[DESTROYED]\n";
+	std::cout << "[DESTROYED] Bureaucrat\n";
 }
 
 Bureaucrat::Bureaucrat(const std::string& name, int grade) : _name(name), _grade(grade)
@@ -77,4 +80,23 @@ const char	*Bureaucrat::GradeTooHighException::what() const throw()
 const char	*Bureaucrat::GradeTooLowException::what() const throw()
 {
 	return ("[grade] below expectations!\n");
+}
+
+
+/* ------------------------ */
+/*     Ex02 Requirement     */
+/* ------------------------ */
+
+void	Bureaucrat::executeForm(AForm const& form)
+{
+	try
+	{
+		form.execute(*this);
+		std::cout << _name << " executed " << form.getName() << std::endl;
+	}
+	catch (std::exception& error)
+	{
+		std::cout << _name << " couldn't execute " << form.getName() <<
+		" because " << error.what() << std::endl;
+	}
 }

@@ -6,16 +6,12 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 13:26:42 by gomandam          #+#    #+#             */
-/*   Updated: 2026/11/03 22:12:55 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/11/11 20:50:40 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef	BUREAUCRAT_HPP
 #define	BUREAUCRAT_HPP
-
-#include <iostream>
-#include <string>
-#include <exception> // try & catch
 
 // Forward declaration "Form": signForm usable
 class Form;
@@ -61,4 +57,3 @@ inline std::ostream&	operator<<(std::ostream& o, Bureaucrat const &other)
 }
 
 #endif
-
