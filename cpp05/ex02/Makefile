@@ -6,7 +6,7 @@
 #    By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/08/10 14:38:59 by gomandam          #+#    #+#              #
-#    Updated: 2026/11/10 15:37:39 by gomandam         ###   ########.fr        #
+#    Updated: 2026/11/12 04:36:02 by gomandam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,9 @@ FLAGS = -Wall -Werror -Wextra -std=c++98 -pedantic
 SOURCES = main.cpp \
 	  AForm.cpp \
 	  Form.cpp \
+	  ShrubberyCreationForm.cpp \
+	  RobotomyRequestForm.cpp \
+	  PresidentialPardonForm.cpp \
 	  Bureaucrat.cpp
 
 OBJECTS = $(SOURCES:.cpp=.o)

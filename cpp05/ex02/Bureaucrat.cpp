@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 13:26:33 by gomandam          #+#    #+#             */
-/*   Updated: 2026/11/12 03:42:04 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/11/12 03:54:07 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,20 @@ const char	*Bureaucrat::GradeTooLowException::what() const throw()
 /* ------------------------ */
 /*     Ex02 Requirement     */
 /* ------------------------ */
+
+void	Bureaucrat::signForm(AForm& form)
+{
+	try
+	{
+		form.beSigned(*this);
+		std::cout << _name <<  " signed " << form.getName() << std::endl;
+	}
+	catch(const std::exception& error)
+	{
+		std::cout << _name << " failed to execute " << form.getName() << " due to "
+		<< error.what() << std::endl;
+	}
+}
 
 void	Bureaucrat::executeForm(AForm const& form)
 {

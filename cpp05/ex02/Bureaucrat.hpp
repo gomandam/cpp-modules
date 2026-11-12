@@ -6,15 +6,14 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 13:26:42 by gomandam          #+#    #+#             */
-/*   Updated: 2026/11/11 20:50:40 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/11/12 03:47:10 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef	BUREAUCRAT_HPP
 #define	BUREAUCRAT_HPP
 
-// Forward declaration "Form": signForm usable
-class Form;
+class AForm;
 
 class	Bureaucrat
 {
@@ -36,18 +35,20 @@ class	Bureaucrat
 		void	incrementGrade();
 		void	decrementGrade();
 		
-		void	signForm(Form& form) const;	// Mandatory as Bureaucrat member fx
+		void	signForm(AForm& form) const;	// Mandatory as Bureaucrat member fx
+
+		void	executeForm(AForm const& form) const;
 
 	class	GradeTooHighException : public std::exception
 	{
 		public:
-			virtual	const char*	what(void) const throw();	
+			const char*	what(void) const throw();	
 	};
 
 	class	GradeTooLowException : public std::exception
 	{
 		public:
-			virtual const char*	what(void) const throw();
+			const char*	what(void) const throw();
 	};
 };
 
