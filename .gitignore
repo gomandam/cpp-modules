@@ -1,4 +1,7 @@
 .github
+.gitignore
+
+*.pdf
 
 *.o
 *.swp
