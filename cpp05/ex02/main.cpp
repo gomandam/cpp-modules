@@ -6,14 +6,14 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 13:26:33 by gomandam          #+#    #+#             */
-/*   Updated: 2026/11/12 04:33:40 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/11/13 23:13:17 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 #include "Form.hpp"
 #include "AForm.hpp"
-#include "ShruberryCreationForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
 
@@ -34,9 +34,9 @@ int	main(void)
 	Bureaucrat king("King", 1);
 	Bureaucrat pawn("Pawn", 140);
 
-	ShruberryCreationForm	shrub("bloom");
+	ShrubberyCreationForm	shrub("bloom");
 	RobotomyRequestForm	robot("robocop");
-	PresidentialPardonForm	king("el Boss");
+	PresidentialPardonForm	pardon("el Boss");
 
 	std::cout << "\n====TRY EXECUTE UNSIGNED FORMS====\n";
 	king.executeForm(shrub);	// Fails: not signed
@@ -48,7 +48,7 @@ int	main(void)
 	std::cout << "\n====GRADES AND FORMS====\n";
 	pawn.signForm(robot);		// Fails: grade low
 	king.signForm(robot);		// OK
-	king.executeForm(robot);	// 50% chance
+	king.executeForm(robot);	// 50% chance of success
 
 	return (0);
 }

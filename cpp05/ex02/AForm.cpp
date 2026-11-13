@@ -6,13 +6,14 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/30 17:06:30 by gomandam          #+#    #+#             */
-/*   Updated: 2026/11/10 16:06:24 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/11/13 23:43:32 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Form.hpp"
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
+#include <exception>
 
 AForm::AForm(const std::string& name, const int  sign_grade, const int  execute_grade) :
   _name(name), _signed(false), _gradeToSign(sign_grade), _gradeToExecute(execute_grade)
