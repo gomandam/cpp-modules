@@ -11,17 +11,18 @@
 /* ************************************************************************** */
 
 #include "ShrubberyCreationForm.hpp"
+#include <fstream>	// ADDED: needed for std::ofstream (was previously pulled in indirectly)
 
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target) :
 AForm("ShrubberyCreationForm", 145, 137), _target(target)	{ }
 
-~ShrubberyCreationForm::ShrubberyCreationForm()
+ShrubberyCreationForm::~ShrubberyCreationForm()	// FIXED: was '~ShrubberyCreationForm::ShrubberyCreationForm()' (invalid syntax)
 {
 	std::cout << "[DESTROYED] ShrubberyCreationForm\n";
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& other) :
-AForm(other)	{ }
+AForm(other), _target(other._target)	{ }	// FIXED: copy the _target as well
 
 ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& other)
 {
@@ -37,18 +38,19 @@ void	ShrubberyCreationForm::execute(Bureaucrat const& executor) const
 	std::ofstream file((_target + "_shrubbery").c_str());
 	file <<   "                             " << std::endl;
 	file <<   "                             " << std::endl;
-	file << R"(            .-º`´           )" << std::endl;
-	file << R"(       .- º`/*·*`..·        )" << std::endl;
-	file << R"(        `.#\^|¶·'*.         )" << std::endl;
-	file << R"(       .·¶·=·:#^/`¶.·       )" << std::endl;
-	file << R"(        :^\_¶=|·=|/~        )" << std::endl;
-	file << R"(       -·\_#·#·¶~_-.`       )" << std::endl;
-	file << R"(        .-*.·||_/*º.        )" << std::endl;
-	file << R"(         `   || ´           )" << std::endl;
-	file << R"(  _._ _.__.-/*\\-.__._ _ .  )" << std::endl;
-	file << R"(-_.-_` ._-/*.%!\ˀ\º-_-_·._.`)" << std::endl;
-	file << R"( - '.·_*··º_/-.··_ '..:-__ ´)" << std::endl;
-	file << R"('   ._ -_:_._· -_'` __.-   -)" << std::endl;
-	file << R"(  __    ._   .'`·  ,    _.  )" << std::endl;
+	// CHANGED: replaced C++11 raw string literals R"(...)" with C++98-compatible escaped strings
+	file << "            .-º`´           " << std::endl;
+	file << "       .- º`/*·*`..·        " << std::endl;
+	file << "        `.#\\^|¶·'*.         " << std::endl;
+	file << "       .·¶·=·:#^/`¶.·       " << std::endl;
+	file << "        :^\\_¶=|·=|/~        " << std::endl;
+	file << "       -·\\_#·#·¶~_-.`       " << std::endl;
+	file << "        .-*.·||_/*º.        " << std::endl;
+	file << "         `   || ´           " << std::endl;
+	file << "  _._ _.__.-/*\\\\-.__._ _ .  " << std::endl;
+	file << "-_.-_` ._-/*.%!\\ˀ\\º-_-_·._.`" << std::endl;
+	file << " - '.·_*··º_/-.··_ '..:-__ ´" << std::endl;
+	file << "'   ._ -_:_._· -_'` __.-   -" << std::endl;
+	file << "  __    ._   .'`·  ,    _.  " << std::endl;
 	file.close();
 }

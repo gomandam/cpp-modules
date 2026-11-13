@@ -96,12 +96,12 @@ void	Bureaucrat::signForm(AForm& form)
 	}
 	catch(const std::exception& error)
 	{
-		std::cout << _name << " failed to execute " << form.getName() << " due to "
+		std::cout << _name << " couldn't sign " << form.getName() << " because "	// FIXED: subject wording "couldn't sign <form> because <reason>"
 		<< error.what() << std::endl;
 	}
 }
 
-void	Bureaucrat::executeForm(AForm const& form)
+void	Bureaucrat::executeForm(AForm const& form) const	// FIXED: added const to match the header and the subject signature
 {
 	try
 	{

@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "AForm.hpp"
-
 #ifndef	PRESIDENTIALPARDONFORM_HPP
 #define	PRESIDENTIALPARDONFORM_HPP
+
+#include "AForm.hpp"	// MOVED: include placed inside the guard like the other form headers
 
 class PresidentialPardonForm : public AForm
 {

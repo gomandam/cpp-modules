@@ -6,14 +6,13 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/30 17:06:30 by gomandam          #+#    #+#             */
-/*   Updated: 2026/11/13 23:43:32 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/11/14 00:00:00 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Form.hpp"
-#include "AForm.hpp"
-#include "Bureaucrat.hpp"
-#include <exception>
+#include "AForm.hpp"	// CHANGED: removed "Form.hpp"; ex02 has no Form class anymore
+#include "Bureaucrat.hpp"	// needed to call Bureaucrat getters inside beSigned/checkExecution
+#include <exception>	// needed for the std::exception base of our exception classes
 
 AForm::AForm(const std::string& name, const int  sign_grade, const int  execute_grade) :
   _name(name), _signed(false), _gradeToSign(sign_grade), _gradeToExecute(execute_grade)
@@ -36,7 +35,7 @@ AForm::AForm(const AForm &other) :
   _gradeToExecute(other._gradeToExecute) { }
 
 // only constructors take base iniitializers ':'
-AForm &AForm::operator=(const AForm &other)
+AForm &AForm::operator=(const AForm &other)	// FIXED: definition already took AForm; now matches the header
 {
 	_signed = other._signed;
 	return (*this);
@@ -75,19 +74,12 @@ const char	*AForm::GradeTooLowException::what() const throw()
 	return ("[exception] Grade to Low.");
 }
 
-void	Bureaucrat::signAForm(AForm& AForm) const
+const char	*AForm::FormNotSignedException::what() const throw()	// ADDED: moved here from the header
 {
-	try
-	{
-		AForm.beSigned(*this);
-		std::cout << getName() << " signed " << AForm.getName() << std::endl;
-	}
-	catch (const std::exception& error)
-	{
-		std::cout << getName() << " can not sign " << AForm.getName()
-			  << " because " << error.what() << std::endl;
-	}
+	return ("[exception] Form not signed.");
 }
+
+// REMOVED: Bureaucrat::signAForm() was a stray duplicate of Bureaucrat::signForm() and had no declaration.
 
 // Execution Check Helper (AForm requirement)
 void	AForm::checkExecution(Bureaucrat const& executor) const
@@ -97,4 +89,3 @@ void	AForm::checkExecution(Bureaucrat const& executor) const
 	if (executor.getGrade() > _gradeToExecute)
 		throw GradeTooLowException();
 }
-

@@ -36,7 +36,7 @@ class	Bureaucrat
 		void	incrementGrade();
 		void	decrementGrade();
 		
-		void	signForm(AForm& form) const;	// Mandatory as Bureaucrat member fx
+		void	signForm(AForm& form);	// FIXED: removed const so it matches its (non-const) definition in Bureaucrat.cpp
 
 		void	executeForm(AForm const& form) const;
 

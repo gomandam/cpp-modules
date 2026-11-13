@@ -6,7 +6,7 @@
 #    By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/08/10 14:38:59 by gomandam          #+#    #+#              #
-#    Updated: 2026/11/12 04:36:02 by gomandam         ###   ########.fr        #
+#    Updated: 2026/11/14 00:17:20 by gomandam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,6 @@ FLAGS = -Wall -Werror -Wextra -std=c++98 -pedantic
 
 SOURCES = main.cpp \
 	  AForm.cpp \
-	  Form.cpp \
 	  ShrubberyCreationForm.cpp \
 	  RobotomyRequestForm.cpp \
 	  PresidentialPardonForm.cpp \
@@ -38,7 +37,7 @@ clean:
 	rm -rf $(OBJECTS)
 
 fclean: clean
-	rm -rf $(NAME) *.out
+	rm -rf $(NAME) *.out bloom_shrubbery
 
 re: fclean all
 
