@@ -1,5 +1,16 @@
 .github
+.gitignore
+
+*.pdf
 
 *.o
 *.swp
 *.out
+
+# OpenCode project config and local instructions (optional)
+opencode.json
+opencode.jsonc
+AGENTS.md
+
+# OpenCode project directory (optional)
+.opencode
