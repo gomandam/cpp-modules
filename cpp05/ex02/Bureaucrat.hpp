@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 13:26:42 by gomandam          #+#    #+#             */
-/*   Updated: 2026/11/13 23:09:18 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/11/14 00:34:57 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ class	Bureaucrat
 		void	incrementGrade();
 		void	decrementGrade();
 		
-		void	signForm(AForm& form);	// FIXED: removed const so it matches its (non-const) definition in Bureaucrat.cpp
+		void	signForm(AForm& form);
 
 		void	executeForm(AForm const& form) const;
 

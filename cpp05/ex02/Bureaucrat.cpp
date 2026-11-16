@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 13:26:33 by gomandam          #+#    #+#             */
-/*   Updated: 2026/11/12 03:54:07 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/11/14 00:33:15 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,12 +96,12 @@ void	Bureaucrat::signForm(AForm& form)
 	}
 	catch(const std::exception& error)
 	{
-		std::cout << _name << " couldn't sign " << form.getName() << " because "	// FIXED: subject wording "couldn't sign <form> because <reason>"
-		<< error.what() << std::endl;
+		std::cout << _name << " couldn't sign " << form.getName() << " because " <<
+		error.what() << std::endl;
 	}
 }
 
-void	Bureaucrat::executeForm(AForm const& form) const	// FIXED: added const to match the header and the subject signature
+void	Bureaucrat::executeForm(AForm const& form) const
 {
 	try
 	{
