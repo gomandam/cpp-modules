@@ -1,0 +1,366 @@
+CPP05 ex03 - Learning Walkthrough (and differences from ex00/ex01/ex02)
+
+1) What the whole program does (ex03)
+-------------------------------------
+This program is the ex02 "bureaucracy" system plus one new worker: the Intern.
+
+- A Bureaucrat still has a name and a grade from 1 to 150.
+  - 1 is the highest grade (most powerful).
+  - 150 is the lowest grade.
+  - Invalid grades or invalid grade changes throw exceptions.
+
+- An AForm is still the abstract base for paperwork that can be signed and executed.
+  - AForm is abstract (cannot be created directly) because execute(...) is pure virtual.
+  - Each form stores: name, signed status, grade required to sign, grade required to execute.
+
+- The three concrete forms from ex02 are reused unchanged:
+  - ShrubberyCreationForm (sign 145, exec 137): creates "<target>_shrubbery" and writes
+    ASCII trees into it.
+  - RobotomyRequestForm (sign 72, exec 45): makes drilling noises and has a 50% chance
+    to report robotomy success or failure for its target.
+  - PresidentialPardonForm (sign 25, exec 5): prints that target was pardoned by
+    Zaphod Beeblebrox.
+
+- ex03 adds exactly one new class: Intern ("At least this beats coffee-making").
+  - The intern has no name, no grade, and no unique characteristics (subject rule).
+  - Its one ability is makeForm(std::string type, std::string target), which returns
+    an AForm* pointing to a brand-new concrete form whose target is the second argument.
+  - It only knows three form names: "shrubbery creation", "robotomy request", and
+    "presidential pardon".
+  - On success it prints something like "Intern creates <form>".
+  - On an unknown name it prints an explicit error and returns NULL.
+  - The returned pointer is allocated with new, so the caller owns it and must delete it
+    (C++98 has no std::unique_ptr).
+
+- The Intern avoids a long if/else-if chain: it keeps a small static table that maps a
+  form name to a maker function, then loops over the table to find a match. The subject
+  explicitly rejects "unreadable and messy" if/else cascades.
+
+- Bureaucrats can still:
+  - sign forms (Bureaucrat::signForm -> AForm::beSigned)
+  - execute forms (Bureaucrat::executeForm -> AForm::execute on the concrete form)
+  In ex03 these are called on the pointer returned by makeForm, after checking it is not NULL.
+
+Unfamiliar terms (plain language):
+- Factory (simple factory / factory method): a place whose job is to create objects for you.
+  Here makeForm() is a one-function factory: give it a name and a target, get a form back.
+- Function pointer: a variable that holds the address of a function, so you can call that
+  function indirectly (forms[i].make(target) below).
+- typedef: gives a shorter, readable name to a type. Here FormMaker means "pointer to a
+  function taking a const std::string& and returning AForm*".
+- static local array: an array declared inside a function with "static"; it is created once
+  and lives until the program ends, so the table is not rebuilt on every makeForm call.
+- new / delete: new creates an object on the heap and returns a pointer to it; delete
+  destroys that object and frees the memory. Every new here must be matched by a delete.
+- Heap vs stack: local variables (like Bureaucrat boss("El Boss", 1)) live on the stack and
+  die at the end of their block; objects created with new live on the heap until deleted.
+- NULL: the C++98 way to write "this pointer points to nothing" (nullptr is C++11, not allowed).
+- Ownership: the rule about who must call delete. makeForm gives ownership to the caller,
+  and main.cpp deletes each returned form at the end of its block.
+- Exception: a way to signal an error by "throwing" an object; code can "catch" it to
+  handle/report the problem instead of crashing.
+- Abstract class / pure virtual function: a class with at least one "= 0" function (here
+  AForm::execute); it defines an interface but cannot be instantiated.
+- Orthodox Canonical Form (OCF): default constructor, copy constructor, copy-assignment
+  operator, destructor. Intern has all four even though it has no data to copy.
+
+
+2) Map of important files and what each one is for
+--------------------------------------------------
+(Primary implementation: CPP05/ex03 ; the only brand-new files are Intern.hpp/Intern.cpp.
+ Everything else is the ex02 implementation copied into ex03 and reused as-is.)
+
+- Makefile
+  Builds the ex03 test binary (NAME = intern_job) with
+  c++ -Wall -Werror -Wextra -std=c++98 -pedantic -finput-charset=UTF-8 -fexec-charset=UTF-8.
+  Sources include all ex02 files plus Intern.cpp; fclean also removes *.out and *_shrubbery.
+
+- main.cpp
+  Test/demo program. Creates one Intern, asks it for forms by name, signs/executes them
+  with Bureaucrats, and checks the edge cases: unknown name (NULL), unsigned form,
+  executor grade too low, and an Intern copy. Every returned form is deleted.
+
+- Intern.hpp / Intern.cpp  (NEW in ex03)
+  Declares/defines class Intern: default constructor, destructor, copy constructor,
+  copy-assignment operator, and AForm *makeForm(const std::string&, const std::string&).
+  Intern.cpp contains three file-static helper functions (makeShrubbery, makeRobotomy,
+  makePresidential), a typedef for the function-pointer type, a FormEntry struct
+  { const char *name; FormMaker make; }, and a static const table of three entries.
+  makeForm loops over the table, calls the matching maker (which does "new ConcreteForm(target)"),
+  prints "Intern creates <type>", and returns NULL with an explicit error if no name matches.
+
+- Bureaucrat.hpp / Bureaucrat.cpp
+  Unchanged from ex02: _name (const), _grade, grade validation, increment/decrement,
+  GradeTooHighException/GradeTooLowException, signForm(AForm&), executeForm(AForm const&) const.
+  operator<< prints bureaucrat info.
+
+- AForm.hpp / AForm.cpp
+  Unchanged from ex02: abstract base (_name, _signed, _gradeToSign, _gradeToExecute),
+  getters, beSigned(const Bureaucrat&), exceptions (GradeTooHigh/Low, FormNotSigned),
+  protected checkExecution(...), and pure virtual execute(...). operator<< prints form state.
+
+- ShrubberyCreationForm.hpp / ShrubberyCreationForm.cpp
+  Unchanged from ex02: sign 145 / exec 137; writes ASCII trees to "<target>_shrubbery".
+
+- RobotomyRequestForm.hpp / RobotomyRequestForm.cpp
+  Unchanged from ex02: sign 72 / exec 45; drilling noise + std::rand() % 2 outcome.
+
+- PresidentialPardonForm.hpp / PresidentialPardonForm.cpp
+  Unchanged from ex02: sign 25 / exec 5; "<target> has been pardoned by Zaphod Beeblebrox".
+
+Note: ex03 adds no new form files and does not change AForm; the Intern simply creates the
+three ex02 forms by string name.
+
+
+3) Simple architecture diagram and execution flow
+-------------------------------------------------
+Architecture (relationships)
+
+  +----------------+    makeForm(type, target)     +--------------------------------+
+  |     Intern     |-------------------------------->|  AForm* (new object on heap)   |
+  | - no data      |   static table lookup           |  caller must delete it         |
+  | + makeForm()   |   -> maker helper -> new Form   +---------------^----------------+
+  +-------+--------+                                                 |
+          | copy (Intern copyIntern = intern)                         | is-a (dynamic type)
+          v                                                           |
+  +-------------------+       sign / execute        +--------------------------------------+
+  |    Bureaucrat     |---------------------------->|  AForm (abstract base, from ex02)    |
+  | - _name (const)   |  signForm -> beSigned       |  - _name, _signed, grades            |
+  | - _grade          |  executeForm -> execute()   |  + beSigned(), checkExecution()      |
+  +-------------------+                             |  + execute() = 0                     |
+                                                    +---------------^----------------------+
+                                                                    | inherits
+                  +---------------------------+---------------------+---------------------------+
+                  |                           |                                                |
+    +---------------------------+ +--------------------------+ +----------------------------+
+    | ShrubberyCreationForm     | | RobotomyRequestForm      | | PresidentialPardonForm     |
+    | "shrubbery creation"      | | "robotomy request"       | | "presidential pardon"      |
+    | sign 145 / exec 137       | | sign 72 / exec 45        | | sign 25 / exec 5           |
+    +---------------------------+ +--------------------------+ +----------------------------+
+
+Execution flow (high level)
+
+  main()
+    -> std::srand(std::time(NULL)) once, so random robotomy results vary per run
+    -> construct one Intern (prints "[CONSTRUCTED] Intern")
+    -> intern.makeForm("robotomy request", "42Marvin")
+         -> loop over static table, compare strings
+         -> call matching maker helper -> new RobotomyRequestForm(target)
+         -> print "Intern creates robotomy request", return AForm*
+    -> if (ptr) boss.signForm(*ptr); boss.executeForm(*ptr); delete ptr;
+    -> unknown name: makeForm prints error and returns NULL; main checks before using it
+    -> unsigned form: executeForm -> execute -> checkExecution throws FormNotSignedException
+    -> low-grade boss (140) signs shrubbery (140 <= 145) but cannot execute it (140 > 137)
+    -> copy the Intern (copy constructor); the copy can makeForm too
+    -> destructors run: "[DESTROYED] ..." messages for forms, bureaucrats and the Intern
+
+
+4) Walkthrough of main.cpp (ex03)
+---------------------------------
+Entry point: int main(void) in ex03/main.cpp.
+
+- Includes and setup
+  - Includes Intern.hpp, Bureaucrat.hpp, AForm.hpp, plus <cstdlib>, <ctime>, <iostream>.
+  - Prints two blank lines, then calls std::srand(std::time(NULL)) to seed the random
+    numbers used by RobotomyRequestForm's 50/50 outcome.
+
+- Create the Intern
+  - Intern randomIntern; no arguments: no name, no grade, no state to validate.
+  - Its constructor prints "[CONSTRUCTED] Intern"; the destructor will print "[DESTROYED] Intern".
+
+- "Subject example" block: known name
+  - Bureaucrat boss("El Boss", 1): highest grade, can sign/execute every form.
+  - AForm *rrf = randomIntern.makeForm("robotomy request", "42Marvin");
+    - "robotomy request" matches the table entry whose maker returns
+      new RobotomyRequestForm("42Marvin") (AForm: name "RobotomyRequestForm", 72/45).
+    - makeForm prints "Intern creates robotomy request" and returns a non-NULL AForm*.
+  - if (rrf) { boss.signForm(*rrf); boss.executeForm(*rrf); delete rrf; }
+    - signForm sets _signed; executeForm prints drilling noise and the random result,
+      then the "executed" success line. delete frees the heap form.
+
+- "Unknown forms" block
+  - randomIntern.makeForm("Other forms ...not sentient", "maybe Aliens")
+    finds no table entry, prints "Intern couldn't create form. Unknown type: ...",
+    and returns NULL.
+  - main checks the pointer: with NULL it prints "OK: unknown form returned NULL";
+    a non-NULL result would print "FAIL: expected NULL for an unknown form".
+
+- "Unsigned forms" block
+  - Bureaucrat worker("Worker", 1); makeForm("shrubbery creation", "whole vineyard").
+  - worker.executeForm(*unsignedForm) is called without signing first.
+    checkExecution throws AForm::FormNotSignedException; executeForm catches it and
+    prints "<worker> couldn't execute ShrubberyCreationForm because [exception] Form not signed."
+  - delete unsignedForm; (it was allocated with new).
+
+- "More jobs": shrubbery with a low-grade boss
+  - Bureaucrat another_boss("Another Boss", 140); makeForm("shrubbery creation", "Bloomberg").
+  - signForm succeeds (140 <= 145); executeForm fails because 140 > 137
+    (AForm::GradeTooLowException), so no shrubbery file is created here.
+  - delete scf;
+
+- "More jobs": presidential pardon with a high-grade boss
+  - Bureaucrat next_boss("Next Boss", 1); makeForm("presidential pardon", "President").
+  - signForm succeeds (1 <= 25) and executeForm succeeds (1 <= 5), printing
+    "President has been pardoned by Zaphod Beeblebrox."
+  - delete ppf;
+
+- "Copied intern" block
+  - Intern copyIntern = randomIntern; uses the copy constructor (OCF). Intern has no
+    data members, so the copy is effectively empty, but it is still a usable Intern.
+  - copyIntern.makeForm("robotomy request", "Clone") returns a new form, which main
+    deletes right away. Shows that copying an Intern does not break makeForm.
+
+- End of main
+  - return (0); local Bureaucrats/Interns are destroyed automatically (stack), and all
+    heap forms were explicitly deleted in their blocks.
+
+
+5) Key classes, functions, data structures, and data movement
+-------------------------------------------------------------
+Classes and key responsibilities
+
+- Intern (Intern.hpp/.cpp) - NEW
+  - Data: none. The subject says it has no name, no grade, and no unique characteristics.
+  - OCF: default ctor and destructor print messages; copy ctor and assignment ignore the
+    other object with (void)other because there is nothing to copy, and assignment returns *this.
+  - makeForm(const std::string& type, const std::string& target):
+      1. Uses a function-local static const FormEntry table of three {name, maker} pairs.
+      2. Loops i = 0..2 and compares type == forms[i].name (simple string equality).
+      3. On a match prints "Intern creates <type>" and returns forms[i].make(target).
+      4. Otherwise prints an explicit error and returns NULL.
+  - The makers are static free functions in Intern.cpp: makeShrubbery, makeRobotomy,
+    makePresidential; each does "return new ConcreteForm(target);" and is returned as AForm*.
+
+- Bureaucrat (Bureaucrat.hpp/.cpp) - carried over from ex02
+  - Data: const std::string _name; int _grade; validation keeps grade in [1,150].
+  - signForm(AForm&): try form.beSigned(*this), then print "<name> signed <form>" or
+    "<name> couldn't sign <form> because <reason>".
+  - executeForm(AForm const&) const: try form.execute(*this), then print executed or
+    "<name> couldn't execute <form> because <reason>".
+  - incrementGrade/decrementGrade throw on grade 1/150; operator<< prints bureaucrat info.
+
+- AForm (AForm.hpp/.cpp) - carried over from ex02
+  - Data: _name, _signed, _gradeToSign, _gradeToExecute (grades/names const).
+  - beSigned(const Bureaucrat&): sets _signed true if grade <= _gradeToSign, else throws
+    GradeTooLowException.
+  - checkExecution(const Bureaucrat&): throws FormNotSignedException if !_signed, then
+    GradeTooLowException if executor.getGrade() > _gradeToExecute.
+  - execute(...) = 0: implemented by the three concrete forms; called polymorphically.
+
+- Concrete forms (unchanged from ex02)
+  - Each stores std::string _target, passes fixed (name, signGrade, execGrade) to AForm,
+    and in execute(...) calls checkExecution(executor) first, then performs its action:
+    file writing, drilling + rand(), or the pardon message.
+
+Data structures
+- A small static const C array: FormEntry forms[3], where each entry is
+  { const char *name; FormMaker make; } and FormMaker is a typedef for
+  AForm *(*)(const std::string&). This is the "table-driven" factory.
+- Raw AForm* pointers returned by new. No STL containers/algorithms are used (module
+  rules restrict them until later modules). No std::unique_ptr (C++11 only).
+
+How data moves
+- Form name: main -> Intern::makeForm(type, ...) -> compared with forms[i].name ->
+  chooses forms[i].make.
+- Target string: main -> makeForm(target) -> maker helper -> concrete form constructor ->
+  stored in _target -> used later in execute() (filename, console message, pardon line).
+- Returned form: new in the maker -> AForm* returned to main -> dereferenced as *rrf for
+  signForm/executeForm -> deleted by main at the end of the block (ownership transfer).
+- Unknown name: no table match -> NULL returned -> main's if(ptr) guard avoids dereferencing.
+- Grade checks: Bureaucrat::_grade is read via getGrade() by beSigned/checkExecution to
+  decide success or throw, exactly as in ex02.
+- Polymorphism: Bureaucrat::executeForm holds AForm const&, so execute() is dispatched at
+  runtime to the concrete type that the Intern created.
+
+
+6) How to build and run, plus useful tests/examples
+---------------------------------------------------
+Build and run (from ex03 directory)
+  cd CPP05/ex03
+  make            # builds ./intern_job
+  ./intern_job
+  make fclean     # removes objects, binary, *.out files, and *_shrubbery output files
+
+Teaching/commented copies
+- ex03 has no separate commented-copy directory in this repo; the teaching comments are
+  inline in Intern.cpp (static helpers, FormMaker typedef, FormEntry table, NULL fallback).
+- For the Bureaucrat/AForm rules reused here, see CPP05-ex02.txt in the parent directory.
+
+Useful tests/examples in main.cpp
+- Known name ("robotomy request"): non-NULL form, "Intern creates ..." message, then
+  sign/execute/delete through a bureaucrat.
+- Unknown name: makeForm returns NULL and prints an explicit error; main prints "OK".
+- Unsigned form: executeForm refuses to run it (FormNotSignedException) even with grade 1.
+- Low-grade boss (140): can sign a shrubbery form but cannot execute it (needs 137).
+- High-grade boss (1): signs and executes the presidential pardon form successfully.
+- Copied intern: Intern copyIntern = randomIntern; still produces a form via makeForm.
+- Robotomy randomness: run the program a few times; std::srand(std::time(NULL)) makes the
+  50% success/failure line vary between runs.
+
+If something is unclear from the code
+- Exact printed strings are implementation-specific; the subject only requires a message
+  like "Intern creates <form>" and an explicit error for unknown names.
+- The loop uses a hardcoded 3 because the table has exactly three entries; using
+  sizeof(forms)/sizeof(forms[0]) would also work and is safer if entries are added later.
+- The subject forbids messy if/else-if chains; this implementation uses the function-pointer
+  table instead, which is the concept to take away from ex03.
+
+
+7) Differences: ex00 vs ex01 vs ex02 vs ex03 (specific feature added each step)
+-------------------------------------------------------------------------------
+ex00 - "Mommy, when I grow up, I want to be a bureaucrat!"
+- Files: Bureaucrat.{hpp,cpp}, main.cpp, Makefile.
+- Focus: only the Bureaucrat class.
+  - Constant name, grade in [1,150] (1 highest).
+  - Constructor/increment/decrement throw GradeTooHighException/GradeTooLowException.
+  - Getters and operator<< for printing.
+- No forms yet.
+
+ex01 - "Form up, maggots!"
+- Adds: Form.{hpp,cpp}; Bureaucrat gains signForm.
+- Focus: introduce a concrete Form class (not abstract).
+  - Form has name, signed flag, grade to sign, grade to execute (with grade validation).
+  - Form::beSigned(Bureaucrat) signs if grade is high enough, else throws.
+  - Bureaucrat::signForm(Form&) tries to sign and prints success or failure reason.
+- Forms can be signed, but there is no execute action yet in this exercise's core flow.
+
+ex02 - "No, you need form 28B, not 28C..."
+- Changes/adds: Form becomes abstract AForm; adds 3 concrete form classes and execution.
+  - AForm (abstract): base with shared data/rules and pure virtual execute(...)=0.
+  - Concrete forms (each takes one target in constructor) with fixed required grades:
+      ShrubberyCreationForm:   sign 145, exec 137 -> creates "<target>_shrubbery" (ASCII trees)
+      RobotomyRequestForm:     sign 72,  exec 45  -> drilling noise + 50% robotomy outcome
+      PresidentialPardonForm:  sign 25,  exec 5   -> "<target> has been pardoned by Zaphod Beeblebrox"
+  - Execution requires the form to be signed and executor grade high enough
+    (AForm::checkExecution / equivalent checks) or an exception is thrown.
+  - Bureaucrat gains executeForm(AForm const&) to attempt execution and report result/errors.
+
+ex03 - "At least this beats coffee-making" (this project)
+- Adds: Intern.{hpp,cpp}; no other class is added or changed.
+- The Intern has no name, no grade, and no unique characteristics (subject rule).
+- New ability: AForm *makeForm(const std::string& type, const std::string& target).
+  - Recognizes exactly: "shrubbery creation", "robotomy request", "presidential pardon".
+  - Uses a static table of {name, function-pointer} entries so the code stays readable
+    (no long if/else-if cascade, which the subject explicitly forbids).
+  - Prints "Intern creates <form>" on success; prints an explicit error and returns NULL
+    for an unknown form name.
+- The created form is allocated with new; main.cpp deletes every returned pointer (ownership).
+- The copied Intern (OCF) can also make forms, showing Intern is stateless but complete.
+- Signing/executing/grade checks are still done by Bureaucrat/AForm exactly as in ex02;
+  ex03 only changes who creates the form (an Intern instead of main writing "new Form" directly).
+
+Progression summary: ex00 = bureaucrat + grade exceptions; ex01 = +signable forms;
+ex02 = +abstract form base + concrete executable forms with real actions and execute checks;
+ex03 = +Intern factory that creates those concrete forms by name and hands back an AForm*
+       that the caller must delete.
+
+
+Short summary: how the pieces fit together
+------------------------------------------
+In ex03, the Intern is a stateless factory: makeForm() looks up a form name in a small
+static table of function pointers and returns a heap-allocated concrete form (or NULL for
+an unknown name). main.cpp takes that AForm*, signs and executes it with a Bureaucrat, and
+deletes it. Bureaucrat still supplies the graded actor and AForm still supplies the shared
+paperwork rules and execution checks from ex02. The only new idea in this exercise is
+"create the right form by string name, cleanly, without an if/else chain, and own the
+pointer you get back".

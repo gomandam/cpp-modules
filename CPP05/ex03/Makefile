@@ -6,11 +6,11 @@
 #    By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/08/10 14:38:59 by gomandam          #+#    #+#              #
-#    Updated: 2026/11/16 14:30:56 by gomandam         ###   ########.fr        #
+#    Updated: 2026/11/18 00:21:33 by gomandam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = other_forms 
+NAME = intern_job 
 
 COMPILER = c++
 
@@ -22,7 +22,8 @@ SOURCES = main.cpp \
 	  ShrubberyCreationForm.cpp \
 	  RobotomyRequestForm.cpp \
 	  PresidentialPardonForm.cpp \
-	  Bureaucrat.cpp
+	  Bureaucrat.cpp \
+	  Intern.cpp
 
 OBJECTS = $(SOURCES:.cpp=.o)
 

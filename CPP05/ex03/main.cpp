@@ -6,93 +6,101 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 13:26:33 by gomandam          #+#    #+#             */
-/*   Updated: 2026/11/17 22:20:08 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/11/18 01:36:58 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Intern.hpp"
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
-#include "ShrubberyCreationForm.hpp"
-#include "RobotomyRequestForm.hpp"
-#include "PresidentialPardonForm.hpp"
-
+#include <cstdlib>
+#include <ctime>
 #include <iostream>
-#include <string>
-#include <exception>	// try & catch
-#include <cstdlib>	// std::srand
-#include <ctime>	// std::time
 
 int	main(void)
 {
-	std::cout << "\n==================================\n";
+	std::cout << "\n\n";
+	std::srand(std::time(NULL));
 
-	std::srand(std::time(NULL));		// seed the RNG
+// One Intern to rule them all. No name, no grade, no unique characteristics 
+	Intern		randomIntern;
 
-	Bureaucrat king("King", 1);		// highest possible grade: can sign/execute every form
-	Bureaucrat pawn("Pawn", 140);		// low grade: used to trigger "grade too low" paths
-	Bureaucrat intern("Intern", 150);	// lowest grade: used for the decrementGrade() exception
-
-	ShrubberyCreationForm	shrub("Bloom");		// sign 145 / exec 137
-	RobotomyRequestForm	robot("Robocop");	// sign 72  / exec 45
-	PresidentialPardonForm	pardon("El Boss");	// sign 25  / exec 5
-
-	std::cout << "\n====BUREAUCRATS (insertion \"operator<<\")====\n";
-	std::cout << king << std::endl;
-	std::cout << pawn << std::endl;
-
-	std::cout << "\n====TRY EXECUTE UNSIGNED FORMS====\n";
-	king.executeForm(shrub);			// must fail: form is not signed yet
-
-	std::cout << "\n====SIGN AND EXECUTE SHRUBBERY====\n";
-	king.signForm(shrub);				// sign grade 145, king(1) succeeds
-	king.executeForm(shrub);			// creates bloom_shrubbery
-	pawn.signForm(shrub);				// pawn(140) can sign (<=145)
-	pawn.executeForm(shrub);			// but cannot execute (>137): signed + grade too low
-
-	std::cout << "\n====ROBOTOMY REQUEST====\n";
-	pawn.signForm(robot);				// fails: pawn(140) > sign grade 72
-	king.signForm(robot);				// OK
-	king.executeForm(robot);			// 50% chance of success (drilling noises)
-
-	std::cout << "\n====PRESIDENTIAL PARDON====\n";
-	king.signForm(pardon);				// OK: king(1) <= sign grade 25
-	pawn.signForm(pardon);				// fails: pawn(140) > sign grade 25
-	king.executeForm(pardon);			// OK: king(1) <= exec grade 5
-	pawn.executeForm(pardon);			// fails: signed, but pawn(140) > exec grade 5
-
-	std::cout << "\n====GRADE LIMIT EXCEPTIONS====\n";
-	try						// constructing with grade 0 must throw GradeTooHighException
+// Subject example: intern creates a known form with the given target
 	{
-		Bureaucrat tooHigh("TrialTooHigh", 0);
+	Bureaucrat	boss("El Boss", 1);
+	AForm		*rrf;
+
+	rrf = randomIntern.makeForm("robotomy request", "42Marvin");
+		if (rrf)
+		{
+			boss.signForm(*rrf);
+			boss.executeForm(*rrf);
+			delete rrf;
+		}
 	}
-	catch (std::exception& e)
+
+// Unknown form name: makeForm prints an explicit error and returns NULL
+	std::cout << "\n\nUnknown forms/jobs for the intern ...Ohh scary\n";
 	{
-		std::cout << "caught: " << e.what() << std::endl;
+	AForm	*unknown = randomIntern.makeForm("Other forms ...not sentient", "maybe Aliens");
+		if (unknown)
+			delete unknown;
+		if (unknown)
+			std::cout << "FAIL: expected NULL for an unknown form\n";
+		else
+			std::cout << "OK: unknown form returned NULL\n";
 	}
-	try						// constructing with grade 151 must throw GradeTooLowException
+
+// Unsigned form: executeForm must refuse to run it
+	std::cout << "\n\nUnsigned forms ...the intern forgot the pen and forms\n";
 	{
-		Bureaucrat tooLow("TooLow", 151);
+	Bureaucrat	worker("Worker", 1);
+	AForm		*unsignedForm = randomIntern.makeForm("shrubbery creation", "whole vineyard");
+
+		if (unsignedForm)
+		{
+			worker.executeForm(*unsignedForm);
+			delete unsignedForm;
+		}
 	}
-	catch (std::exception& e)
+
+// More samples from: shrubbery creation, presidential pardon
 	{
-		std::cout << "caught: " << e.what() << std::endl;
+	std::cout << "\n\nMore jobs for the intern ...\n";
+	Bureaucrat	another_boss("Another Boss", 140);
+	AForm		*scf;
+
+	scf = randomIntern.makeForm("shrubbery creation", "Bloomberg");
+		if (scf)
+		{
+			another_boss.signForm(*scf);
+			another_boss.executeForm(*scf);
+			delete scf;
+		}
+	} 
+
+	{
+	std::cout << "\n\n";
+	Bureaucrat	next_boss("Next Boss", 1);
+	AForm		*ppf;
+
+	ppf = randomIntern.makeForm("presidential pardon", "President");
+		if (ppf)
+		{
+			next_boss.signForm(*ppf);
+			next_boss.executeForm(*ppf);
+			delete ppf;
+		}
 	}
-	try						// incrementing a grade-1 bureaucrat must throw GradeTooHighException
+
+// Intern copy: a cloned intern can make forms too
+	std::cout << "\n\nCopied intern ...double the trouble, cloned interns can make forms too btw\n";
 	{
-		king.incrementGrade();
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "caught: " << e.what() << std::endl;
-	}
-	try						// decrementing a grade-150 bureaucrat must throw GradeTooLowException
-	{
-		intern.decrementGrade();
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "caught: " << e.what() << std::endl;
+		Intern		copyIntern = randomIntern;
+		AForm		*copiedForm = copyIntern.makeForm("robotomy request", "Clone");
+
+		if (copiedForm)
+			delete copiedForm;
 	}
 
 	return (0);

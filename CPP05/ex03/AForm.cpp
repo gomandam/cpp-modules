@@ -6,12 +6,12 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/30 17:06:30 by gomandam          #+#    #+#             */
-/*   Updated: 2026/11/14 00:29:26 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/11/18 01:03:29 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "AForm.hpp"		// removed "Form.hpp"; ex02 has no Form class anymore
-#include "Bureaucrat.hpp"	// call Bureaucrat getters inside beSigned/checkExecution
+#include "AForm.hpp"
+#include "Bureaucrat.hpp"
 #include <exception>		// base of our exception classes
 
 AForm::AForm(const std::string& name, const int  sign_grade, const int  execute_grade) :
@@ -49,7 +49,6 @@ void	AForm::beSigned(const Bureaucrat &cat)
 	else
 		throw GradeTooLowException();
 }
-// class name (a type), can not be passed as object. use the parameter
 
 const std::string&	AForm::getName() const
 {	return (_name);			}
@@ -74,13 +73,11 @@ const char	*AForm::GradeTooLowException::what() const throw()
 	return ("[exception] Grade to Low.");
 }
 
-// ADDED: moved here from the header, must not put functions inside .hpp
 const char	*AForm::FormNotSignedException::what() const throw()
 {
 	return ("[exception] Form not signed.");
 }
 
-// Execution Check Helper (AForm requirement)
 void	AForm::checkExecution(Bureaucrat const& executor) const
 {
 	if (!_signed)

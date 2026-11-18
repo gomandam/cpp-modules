@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/17 01:07:11 by gomandam          #+#    #+#             */
-/*   Updated: 2026/11/17 23:23:47 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/11/18 00:30:10 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,19 @@
 #include "PresidentialPardonForm.hpp"
 
 // Explicitly required: "Intern" has no name, no grade, & no unique characteristics
+// Interface class
 
 Intern::Intern()
-{	std::cout << "[CONSTRUCTED] Intern.\n";		}
+{	std::cout << "[CONSTRUCTED] Intern \n";		}
 
 Intern::~Intern()
-{	std::cout << "[DESTROYED] Intern.\n";		}
+{	std::cout << "[DESTROYED] Intern \n";		}
 
 Intern::Intern(const Intern& other)
 {	(void)other;					}
 
 Intern&	Intern::operator=(const Intern& other)
-{	(void)other;	return (*this)			}
+{	(void)other;	return (*this);			}
 
 
 /* **** Functions Types ***** */
