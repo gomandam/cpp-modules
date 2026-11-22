@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/05 15:31:43 by gomandam          #+#    #+#             */
-/*   Updated: 2026/11/18 01:04:40 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/11/22 20:35:26 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ class	AForm
 inline	std::ostream& operator<<(std::ostream& os, const AForm& aform)
 {
 	return os	<< "AForm " <<  aform.getName()
-			<< " signed: " << (aform.returnSigned() ? "yes" : "no")
+			<< " [signed: " << (aform.returnSigned() ? "yes" : "no")
 			<< ", sign grade: " << aform.getGradeSign()
-			<< ", executed: " << aform.getGradeExecute() << ']';
+			<< ", execute grade: " << aform.getGradeExecute() << ']';
 }
 
 #endif

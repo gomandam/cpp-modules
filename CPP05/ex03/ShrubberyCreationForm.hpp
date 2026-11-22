@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/10 16:12:51 by gomandam          #+#    #+#             */
-/*   Updated: 2026/11/16 12:37:51 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/11/22 21:26:52 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ class ShrubberyCreationForm : public AForm
 		std::string	_target;
 
 	public:
+		ShrubberyCreationForm();
 		ShrubberyCreationForm(const std::string& target);
 		~ShrubberyCreationForm();
 

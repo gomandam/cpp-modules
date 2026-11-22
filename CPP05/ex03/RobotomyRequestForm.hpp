@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 20:20:25 by gomandam          #+#    #+#             */
-/*   Updated: 2026/11/16 12:39:27 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/11/22 21:27:59 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ class RobotomyRequestForm : public AForm
 		std::string	_target;
 
 	public:
+		RobotomyRequestForm();
 		RobotomyRequestForm(const std::string& target);
 		~RobotomyRequestForm();
 		RobotomyRequestForm(const RobotomyRequestForm& other);

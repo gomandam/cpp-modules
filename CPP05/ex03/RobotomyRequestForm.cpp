@@ -6,12 +6,16 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 20:20:16 by gomandam          #+#    #+#             */
-/*   Updated: 2026/11/16 12:44:42 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/11/22 20:38:12 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RobotomyRequestForm.hpp"
 #include <cstdlib>
+
+// default constructor definition (OCF).
+RobotomyRequestForm::RobotomyRequestForm() :
+	AForm("RobotomyRequestForm", 72, 45), _target("default") { }
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string& target) :
 	AForm("RobotomyRequestForm", 72, 45), _target(target) { }
@@ -27,7 +31,10 @@ RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& other) :
 RobotomyRequestForm&	RobotomyRequestForm::operator=(const RobotomyRequestForm& other)
 {
 	if (this != &other)
+	{
 		AForm::operator=(other);
+		_target = other._target;
+	}
 	return (*this);
 }
 

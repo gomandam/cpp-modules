@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 03:56:44 by gomandam          #+#    #+#             */
-/*   Updated: 2026/11/16 12:45:47 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/11/22 20:37:19 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ class PresidentialPardonForm : public AForm
 		std::string	_target;
 
 	public:
+		PresidentialPardonForm();
 		PresidentialPardonForm(const std::string& target);
 		~PresidentialPardonForm();
 

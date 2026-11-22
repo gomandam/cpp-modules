@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 13:26:33 by gomandam          #+#    #+#             */
-/*   Updated: 2026/11/16 14:29:18 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/11/22 20:32:39 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ int	main(void)
 	Bureaucrat pawn("Pawn", 140);		// low grade: used to trigger "grade too low" paths
 	Bureaucrat intern("Intern", 150);	// lowest grade: used for the decrementGrade() exception
 
-	ShrubberyCreationForm	shrub("Bloom");		// sign 145 / exec 137
-	RobotomyRequestForm	robot("Robocop");	// sign 72  / exec 45
-	PresidentialPardonForm	pardon("El Boss");	// sign 25  / exec 5
+	ShrubberyCreationForm	shrub("bloom-ASCIIfile");	// sign 145 / exec 137
+	RobotomyRequestForm	robot("Robocop");		// sign 72  / exec 45
+	PresidentialPardonForm	pardon("El Boss");		// sign 25  / exec 5
 
 	std::cout << "\n====BUREAUCRATS (insertion \"operator<<\")====\n";
 	std::cout << king << std::endl;

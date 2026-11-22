@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/30 17:06:41 by gomandam          #+#    #+#             */
-/*   Updated: 2026/11/03 22:02:52 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/11/22 20:21:15 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,23 +41,21 @@ class Form
 	{
 		public:
 			const char*  what() const  throw(); 
-//			{	return "Grade too high!";	}
 	};
 
 	class	GradeTooLowException : public std::exception
 	{
 		public:
 			const char* what() const throw();
-//			{	return "Grade too Low!";	}
 	};
 };
 
 inline	std::ostream& operator<<(std::ostream& os, const Form& form)
 {
 	return os	<< "Form " << form.getName()
-			<< " signed: " << (form.returnSigned() ? "yes" : "no")
+			<< " [signed: " << (form.returnSigned() ? "yes" : "no")
 			<< ", sign grade: " << form.getGradeSign()
-			<< ", executed: " << form.getGradeExecute() << "]";
+			<< ", execute grade: " << form.getGradeExecute() << "]";
 }
 
 #endif
@@ -65,5 +63,4 @@ inline	std::ostream& operator<<(std::ostream& os, const Form& form)
 /*
 References:
 	1. https://42tutor.com/guides/05-exceptions/
- 	2. 
 */
