@@ -6,13 +6,15 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 13:26:42 by gomandam          #+#    #+#             */
-/*   Updated: 2026/11/14 00:34:57 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/11/22 20:23:18 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef	BUREAUCRAT_HPP
 #define	BUREAUCRAT_HPP
 #include <iostream>
+#include <string>
+#include <exception>
 
 class AForm;
 

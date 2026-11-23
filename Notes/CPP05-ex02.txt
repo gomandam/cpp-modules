@@ -1,0 +1,277 @@
+CPP05 ex02 - Learning Walkthrough (and differences from ex00/ex01)
+
+1) What the whole program does (ex02)
+-------------------------------------
+This program simulates a small "bureaucracy" system in C++.
+
+- A Bureaucrat has a name and a grade from 1 to 150.
+  - 1 is the highest grade (most powerful).
+  - 150 is the lowest grade.
+  - Invalid grades or invalid grade changes throw exceptions.
+
+- An AForm represents paperwork that can be signed and executed.
+  - AForm is "abstract" (cannot be created directly) because it has a pure virtual
+    execute(...) function.
+  - Each form stores: name, signed status, grade required to sign, grade required to execute.
+
+- ex02 adds three concrete forms (real forms that do something when executed):
+  - ShrubberyCreationForm (sign 145, exec 137): creates file "<target>_shrubbery"
+    and writes ASCII trees into it.
+  - RobotomyRequestForm (sign 72, exec 45): makes drilling noises and has a 50%
+    chance to report robotomy success or failure for its target.
+  - PresidentialPardonForm (sign 25, exec 5): prints that target was pardoned by
+    Zaphod Beeblebrox.
+
+- Bureaucrats can:
+  - sign forms (Bureaucrat::signForm -> AForm::beSigned)
+  - execute forms (Bureaucrat::executeForm -> AForm::execute on the concrete form)
+  Both operations report success or print an explicit reason on failure.
+
+Unfamiliar terms (plain language):
+- Exception: a way to signal an error by "throwing" an object; code can "catch" it
+  to handle/report the problem instead of crashing.
+- Abstract class: a class with at least one pure virtual function (= 0). It defines
+  a common interface but cannot be instantiated by itself.
+- Pure virtual function: a function declared with "= 0" that derived classes must
+  implement (e.g. virtual void execute(...) const = 0).
+- Derived/concrete class: a class that inherits from AForm and provides the actual
+  execute(...) behavior.
+- Orthodox Canonical Form (OCF): common C++ class shape used in these modules:
+  default constructor, copy constructor, copy-assignment operator, destructor.
+
+
+2) Map of important files and what each one is for
+--------------------------------------------------
+(Primary implementation: CPP05/ex02 ; commented teaching copies: CPP05/COMMENTED_TEXT)
+
+- Makefile
+  Builds the ex02 test binary (NAME = other_forms) with c++ -Wall -Wextra -Werror -std=c++98.
+  Sources include Bureaucrat, AForm, and the three concrete form classes.
+
+- main.cpp
+  Test/demo program. Creates bureaucrats and forms, tries signing/executing in valid
+  and invalid cases, and catches grade-limit exceptions to show required behavior.
+
+- Bureaucrat.hpp / Bureaucrat.cpp
+  Declares/defines class Bureaucrat (_name, _grade), grade validation, increment/
+  decrement, GradeTooHighException/GradeTooLowException, signForm(AForm&), and
+  executeForm(AForm const&). operator<< prints bureaucrat info.
+
+- AForm.hpp / AForm.cpp
+  Declares/defines abstract base class AForm (_name, _signed, _gradeToSign,
+  _gradeToExecute). Provides getters, beSigned(const Bureaucrat&), exceptions
+  (GradeTooHigh/Low, FormNotSigned), protected checkExecution(...), and pure virtual
+  execute(...). operator<< prints form state.
+
+- ShrubberyCreationForm.hpp / ShrubberyCreationForm.cpp
+  Concrete form derived from AForm. Stores _target; execute(...) checks permissions
+  then writes ASCII trees to "<_target>_shrubbery" (uses std::ofstream).
+
+- RobotomyRequestForm.hpp / RobotomyRequestForm.cpp
+  Concrete form derived from AForm. Stores _target; execute(...) checks permissions,
+  prints drilling noise, then uses std::rand() % 2 for 50% success/failure.
+
+- PresidentialPardonForm.hpp / PresidentialPardonForm.cpp
+  Concrete form derived from AForm. Stores _target; execute(...) checks permissions
+  then prints "<target> has been pardoned by Zaphod Beeblebrox.".
+
+Note: ex02 has no Form class/files (unlike ex01); the base is AForm.
+
+
+3) Simple architecture diagram and execution flow
+-------------------------------------------------
+Architecture (relationships)
+
+  +-------------------+         uses/signs/executes         +----------------------+
+  |    Bureaucrat     |------------------------------------>|        AForm         |
+  | - _name (const)   |                                     | (abstract base)      |
+  | - _grade          |                                     | - _name, _signed     |
+  | + signForm()      |  signForm -> beSigned               | - _gradeToSign/Exec  |
+  | + executeForm()   |  executeForm -> execute()           | + beSigned()         |
+  +-------------------+                                     | + checkExecution()   |
+                                                            | + execute() = 0      |
+                                                            +----------^-----------+
+                                                                       | inherits
+                    +---------------------------+----------------------+---------------------------+
+                    |                           |                                                  |
+      +---------------------------+  +--------------------------+               +----------------------------+
+      |  ShrubberyCreationForm    |  |  RobotomyRequestForm     |               |  PresidentialPardonForm    |
+      |  sign 145 / exec 137      |  |  sign 72 / exec 45       |               |  sign 25 / exec 5          |
+      |  - _target                |  |  - _target               |               |  - _target                 |
+      |  + execute(): write file  |  |  + execute(): 50% result |               |  + execute(): pardon msg   |
+      +---------------------------+  +--------------------------+               +----------------------------+
+
+Execution flow (high level)
+
+  main()
+    -> construct Bureaucrats (grade validated; may throw)
+    -> construct concrete forms (AForm part sets name/grades; form stores target)
+    -> Bureaucrat::executeForm(form): try form.execute(bureaucrat) -> print success or catch error
+    -> Bureaucrat::signForm(form): try form.beSigned(bureaucrat) -> print signed or catch error
+    -> form.execute(...) path: checkExecution(...) then perform concrete action
+    -> exception demos: try/catch around invalid constructions and grade changes
+
+
+4) Walkthrough of main.cpp (ex02)
+---------------------------------
+Entry point: int main(void) in ex02/main.cpp.
+
+- Includes and setup
+  - Includes Bureaucrat.hpp, AForm.hpp, and all three concrete form headers.
+  - Calls std::srand(std::time(NULL)) to seed random numbers so RobotomyRequestForm's
+    50/50 outcome varies between runs.
+
+- Create actors (bureaucrats)
+  - Bureaucrat king("King", 1): highest grade, can sign/execute all ex02 forms.
+  - Bureaucrat pawn("Pawn", 140): low grade, used to show failures.
+  - Bureaucrat intern("Intern", 150): lowest grade, used for decrement exception.
+  Construction goes through Bureaucrat::Bureaucrat(name, grade) which throws
+  GradeTooHighException/GradeTooLowException if out of [1,150].
+
+- Create concrete forms (each takes only target)
+  - ShrubberyCreationForm shrub("Bloom")   -> AForm("ShrubberyCreationForm", 145, 137)
+  - RobotomyRequestForm   robot("Robocop") -> AForm("RobotomyRequestForm", 72, 45)
+  - PresidentialPardonForm pardon("El Boss")-> AForm("PresidentialPardonForm", 25, 5)
+
+- Print bureaucrats
+  - Uses operator<<(ostream&, Bureaucrat const&) to display name/grade.
+
+- "TRY EXECUTE UNSIGNED FORMS"
+  - king.executeForm(shrub): calls shrub.execute(king). checkExecution sees !_signed
+    and throws AForm::FormNotSignedException; executeForm catches and prints failure.
+
+- "SIGN AND EXECUTE SHRUBBERY"
+  - king.signForm(shrub): shrub.beSigned(king) succeeds (1 <= 145), sets _signed true.
+  - king.executeForm(shrub): checkExecution passes (1 <= 137), creates "Bloom_shrubbery".
+  - pawn.signForm(shrub): pawn grade 140 <= 145 so signing succeeds.
+  - pawn.executeForm(shrub): signed, but 140 > 137 so checkExecution throws
+    AForm::GradeTooLowException -> executeForm reports failure.
+
+- "ROBOTOMY REQUEST"
+  - pawn.signForm(robot): fails (140 > 72). king.signForm(robot): succeeds.
+  - king.executeForm(robot): prints drilling noise, then std::rand()%2 chooses
+    success or "Robotomy of Robocop failed!".
+
+- "PRESIDENTIAL PARDON"
+  - king.signForm(pardon) succeeds (1 <= 25); pawn.signForm(pardon) fails (140 > 25).
+  - king.executeForm(pardon) prints pardon message; pawn.executeForm(pardon) fails
+    on execute grade (140 > 5).
+
+- "GRADE LIMIT EXCEPTIONS"
+  - try/catch blocks intentionally trigger:
+    - Bureaucrat("TrialTooHigh", 0)  -> GradeTooHighException
+    - Bureaucrat("TooLow", 151)      -> GradeTooLowException
+    - king.incrementGrade()          -> GradeTooHighException (already grade 1)
+    - intern.decrementGrade()        -> GradeTooLowException (already grade 150)
+
+
+5) Key classes, functions, data structures, and data movement
+-------------------------------------------------------------
+Classes and key responsibilities
+
+- Bureaucrat (Bureaucrat.hpp/.cpp)
+  - Data: const std::string _name; int _grade.
+  - Validation/rules: constructor and incrementGrade/decrementGrade enforce [1,150].
+  - getName(), getGrade(): accessors.
+  - signForm(AForm&): calls form.beSigned(*this); prints "<name> signed <form>" or
+    "<name> couldn't sign <form> because <reason>" (from exception::what()).
+  - executeForm(AForm const&): calls form.execute(*this); prints executed/couldn't execute.
+
+- AForm (AForm.hpp/.cpp)
+  - Data: _name, _signed, _gradeToSign, _gradeToExecute (grades/names const; _signed mutable via beSigned/assignment).
+  - beSigned(const Bureaucrat&): sets _signed true if bureaucrat.getGrade() <= _gradeToSign,
+    else throws GradeTooLowException.
+  - checkExecution(const Bureaucrat&): throws FormNotSignedException if !_signed, or
+    GradeTooLowException if executor.getGrade() > _gradeToExecute.
+  - execute(...) = 0: contract implemented by derived forms.
+
+- Concrete forms (ShrubberyCreationForm / RobotomyRequestForm / PresidentialPardonForm)
+  - Data: std::string _target (the only constructor parameter).
+  - Each constructor passes fixed (name, signGrade, execGrade) to AForm base.
+  - execute(...) calls checkExecution(executor) first, then performs its specific action.
+
+Data structures
+- Mostly plain objects and std::string; ShrubberyCreationForm uses std::ofstream for
+  file output. No STL containers/algorithms are used (and module rules restrict them
+  until later modules).
+
+How data moves
+- Target string: main -> concrete form constructor -> stored in form._target -> used in
+  action (filename, console message, or pardon message).
+- Grade checks: Bureaucrat::_grade is read via getGrade() by AForm::beSigned and
+  AForm::checkExecution to decide success or throw.
+- Form state: AForm::_signed starts false, becomes true in beSigned; checkExecution and
+  printing (returnSigned) read it.
+- Polymorphic execution: Bureaucrat::executeForm holds AForm const&; calling execute()
+  dispatches at runtime to the concrete form's implementation.
+
+
+6) How to build and run, plus useful tests/examples
+---------------------------------------------------
+Build and run (from ex02 directory)
+  cd CPP05/ex02
+  make            # builds ./other_forms
+  ./other_forms
+  make fclean     # removes objects, binary, and *_shrubbery output files
+
+COMMENTED_TEXT copies
+- CPP05/COMMENTED_TEXT contains commented versions of the same ex02 files for reading.
+  They are not wired to the ex02 Makefile; build/run the real program from ex02/.
+
+Useful tests/examples in main.cpp
+- Execute unsigned form: shows FormNotSignedException path via executeForm.
+- Shrubbery sign/execute: shows file side effect (Bloom_shrubbery) and "signed but
+  cannot execute" case (pawn).
+- Robotomy: shows 50/50 behavior (run multiple times to observe both outcomes if desired).
+- Presidential pardon: shows strict grade requirements (sign 25, exec 5).
+- Grade limit try/catch blocks: shows Bureaucrat construction/increment/decrement exceptions.
+
+If something is unclear from the code
+- The exact text/formatting of some printed messages can vary slightly from subject
+  examples (the code defines its own strings). Behavior/requirements are clear.
+- ASCII art content in ShrubberyCreationForm is implementation-specific as long as it
+  writes ASCII trees to "<target>_shrubbery".
+
+
+7) Differences: ex00 vs ex01 vs ex02 (specific feature added each step)
+----------------------------------------------------------------------
+ex00 - "Mommy, when I grow up, I want to be a bureaucrat!"
+- Files: Bureaucrat.{hpp,cpp}, main.cpp, Makefile.
+- Focus: only the Bureaucrat class.
+  - Constant name, grade in [1,150] (1 highest).
+  - Constructor/increment/decrement throw GradeTooHighException/GradeTooLowException.
+  - Getters and operator<< for printing.
+- No forms yet.
+
+ex01 - "Form up, maggots!"
+- Adds: Form.{hpp,cpp}; Bureaucrat gains signForm.
+- Focus: introduce a concrete Form class (not abstract).
+  - Form has name, signed flag, grade to sign, grade to execute (with grade validation).
+  - Form::beSigned(Bureaucrat) signs if grade is high enough, else throws.
+  - Bureaucrat::signForm(Form&) tries to sign and prints success or failure reason.
+- Forms can be signed, but there is no execute action yet in this exercise's core flow.
+
+ex02 - "No, you need form 28B, not 28C..." (this project)
+- Changes/adds: Form becomes abstract AForm; adds 3 concrete form classes and execution.
+  - AForm (abstract): base with shared data/rules and pure virtual execute(...)=0.
+  - Concrete forms (each takes one target in constructor) with fixed required grades:
+      ShrubberyCreationForm:   sign 145, exec 137 -> creates "<target>_shrubbery" (ASCII trees)
+      RobotomyRequestForm:     sign 72,  exec 45  -> drilling noise + 50% robotomy outcome
+      PresidentialPardonForm:  sign 25,  exec 5   -> "<target> has been pardoned by Zaphod Beeblebrox"
+  - Execution requires the form to be signed and executor grade high enough
+    (AForm::checkExecution / equivalent checks) or an exception is thrown.
+  - Bureaucrat gains executeForm(AForm const&) to attempt execution and report result/errors.
+
+Progression summary: ex00 = bureaucrat + grade exceptions; ex01 = +signable forms;
+ex02 = +abstract form base + concrete executable forms with real actions and execute checks.
+
+
+Short summary: how the pieces fit together
+------------------------------------------
+In ex02, Bureaucrat provides the actor (with graded authority) and AForm provides the
+shared paperwork rules (identity, signed state, grade thresholds, and validation). The
+three concrete form classes plug specific actions into that common interface via execute().
+main.cpp wires them together: it creates bureaucrats/forms, asks bureaucrats to sign and
+execute forms, and uses try/catch to surface the same rule violations the subject requires
+(unsigned, grade too low/high). This builds directly on ex00's grade/exception model and
+ex01's signing model by making forms abstract and actually executable.

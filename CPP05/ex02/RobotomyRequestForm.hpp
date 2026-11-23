@@ -21,6 +21,8 @@ class RobotomyRequestForm : public AForm
 		std::string	_target;
 
 	public:
+		// Required Change: Add canonical default constructor declaration (OCF).
+		RobotomyRequestForm();
 		RobotomyRequestForm(const std::string& target);
 		~RobotomyRequestForm();
 		RobotomyRequestForm(const RobotomyRequestForm& other);
